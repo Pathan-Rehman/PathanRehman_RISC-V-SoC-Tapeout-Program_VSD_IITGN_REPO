@@ -365,5 +365,5 @@ iverilog -Ttyp \
 
 ## Bottom line
 
-The message is cosmetic; the actual simulation **is** using GL housekeeping if you followed the compile steps correctly. The register read values matching between RTL and GLS logs proves functional equivalence, which is the real verification objective.[2][4][1]
+The message is cosmetic; the actual simulation **is** using GL housekeeping if you followed the compile steps correctly. The register read values matching between RTL and GLS logs proves functional equivalence, which is the real verification objective.
 
