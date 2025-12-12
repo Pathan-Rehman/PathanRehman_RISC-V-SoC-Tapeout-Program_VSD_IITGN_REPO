@@ -351,10 +351,12 @@ This will convert the blackboxed modules to external includes, allowing you to p
    ```
 <img width="728" height="383" alt="image" src="https://github.com/user-attachments/assets/8d45c1cd-c3cf-4d5a-b282-04c6fa42915f" />
 <img width="736" height="490" alt="image" src="https://github.com/user-attachments/assets/6444f84e-0fa9-47ff-80ec-84d21f2bca6d" />
+
 17. Visualize the Testbench waveforms for complete design using following command
    ```
    gtkwave hkspi.vcd hkspi_tb.v
    ```
+
 <img width="1580" height="888" alt="image" src="https://github.com/user-attachments/assets/51c2e6c4-615e-42c6-8c00-f6fa82542aa9" />
 
 18. Compare output from functional Simulation and GLS to verify the synthesis output
