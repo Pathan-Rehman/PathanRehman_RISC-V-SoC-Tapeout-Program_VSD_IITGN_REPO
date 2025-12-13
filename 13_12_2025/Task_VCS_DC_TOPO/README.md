@@ -267,4 +267,41 @@ Step 4: After all changes re-run the command make compile
 
 # Synthesis Setup
 
+1. Modify and verify following variables in synth.tcl file at path [./synthesis/synth.tcl](./synthesis/synth.tcl)
+   ```
+   library Path
+   Root Directory Path
+   SCL PDK Path
+   SCL IO PATH
+
+   ```
+### Running Synthesis
+9. open a terminal and cd to the work folder i.e. [./synthesis/work_folder](./synthesis/work_folder)
+10. Run synthesis using following command
+```
+dc_shell -f ../synth.tcl
+```
+
+<img width="787" height="816" alt="image" src="https://github.com/user-attachments/assets/1f7ddfd0-c6f6-40c6-abf8-b137f6e28b33" />
+
+This should update the caravel_snthesis.v file in [./synthesis/output](./synthesis/output) folder
+
+<img width="679" height="79" alt="image" src="https://github.com/user-attachments/assets/8cfe6758-4e8b-4210-9011-dc41340da593" />
+
+11. check out the reports
+
+### Power Post Synth Report
+
+<img width="786" height="752" alt="image" src="https://github.com/user-attachments/assets/54a7e6f6-2a76-45c3-9338-7f8ec02dc9d0" />
+
+### QoR Post Synth Report
+
+<img width="784" height="749" alt="image" src="https://github.com/user-attachments/assets/f0dc20c7-f62f-478e-ace0-b1284a798254" />
+
+### Area Post Synth Report
+
+<img width="786" height="751" alt="image" src="https://github.com/user-attachments/assets/467285bc-00cf-4de5-8637-7a6c7e64dd03" />
+
+# GLS Setup
+
 
