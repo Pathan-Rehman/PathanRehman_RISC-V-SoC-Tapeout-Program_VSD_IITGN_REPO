@@ -275,9 +275,10 @@ Step 4: After all changes re-run the command make compile
         ◦ Area, timing, and power reports
 		
 Important Constraint:
-    • POR and memory modules must remain as RTL modules
-    • Do not synthesize or replace them with macros yet
-    • Treat them as modules/blackboxes as appropriate
+
+	1) POR and memory modules must remain as RTL modules
+    2) Do not synthesize or replace them with macros yet
+    3) Treat them as modules/blackboxes as appropriate
 
 as per the task 2 we need to make modules like POR and memory modules such as RAM128 and RAM256 as blackbox and should not synthesize them. To do that we need to change synth.tcl with many changes. Follow the included synth.tcl file in the repository to make the modules as blackbox and synthesis rest of the logic.
 
