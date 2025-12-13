@@ -972,6 +972,9 @@ puts "INFO: Synthesis Complete!"
 
 ***
 
+<img width="1148" height="745" alt="image" src="https://github.com/user-attachments/assets/3e6f4e2e-8dde-4ca5-a4a6-690ff0c74754" />
+
+
 This script ensures RAM128, RAM256, and dummy_por remain as port-only blackboxes, ready for macro replacement during physical design!
 
 ## Running tcl file
