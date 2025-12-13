@@ -973,3 +973,54 @@ puts "INFO: Synthesis Complete!"
 ***
 
 This script ensures RAM128, RAM256, and dummy_por remain as port-only blackboxes, ready for macro replacement during physical design!
+
+## Running tcl file
+
+- To run the tcl file change to the synthesis directory and run the following command
+  ```
+	dc_shell -f synth.tcl | tee synthesis_complete.log
+  ```
+- The above command will do synthesis using dc_shell tool and create a log file.
+
+<img width="738" height="662" alt="image" src="https://github.com/user-attachments/assets/f205ea8e-ece9-4968-bf07-7f60a4a2e18b" />
+
+- After synthesis go to output directory and check the `vsdcaravel_synthesis.v`. The POR and Memory modules will have only ports.
+
+<img width="791" height="748" alt="image" src="https://github.com/user-attachments/assets/9edfa89b-128f-4a53-9574-fe0cd48dbf02" />
+
+## Reports
+
+After synthesis report files will be generated in the report directory such as area, power, timing, constraints, qor and blackbox_modules reports.
+
+<img width="730" height="276" alt="image" src="https://github.com/user-attachments/assets/f76d19ad-03ee-4add-9475-e44451550618" />
+
+
+### area report
+
+<img width="793" height="214" alt="image" src="https://github.com/user-attachments/assets/cf3e67c2-5c26-4f90-8a41-0c35211cc8bf" />
+<img width="675" height="378" alt="image" src="https://github.com/user-attachments/assets/e0d25b1a-9934-49d0-a713-525dfc113762" />
+
+### power report
+
+<img width="789" height="501" alt="image" src="https://github.com/user-attachments/assets/b902c57d-ac75-49b1-bcc1-73c1ac7dc8a9" />
+<img width="1152" height="746" alt="image" src="https://github.com/user-attachments/assets/6accb5ce-89b4-4a86-a0d5-e2ac9d4ebaa8" />
+
+### qor report
+
+<img width="1154" height="193" alt="image" src="https://github.com/user-attachments/assets/2607ea3b-a48e-4e48-a645-413d3efc4cb0" />
+<img width="673" height="373" alt="image" src="https://github.com/user-attachments/assets/9fc97443-332a-4106-9a22-982eb4b6718d" />
+
+### timing report
+
+<img width="1152" height="320" alt="image" src="https://github.com/user-attachments/assets/90d08744-5fa4-4ce8-93e9-32a97bd24e28" />
+<img width="719" height="589" alt="image" src="https://github.com/user-attachments/assets/afde1417-ac05-487c-a336-f30967418b5b" />
+
+### constraints
+
+<img width="1151" height="251" alt="image" src="https://github.com/user-attachments/assets/22b8ff3e-3256-4b8c-b8ab-e84737d1cf27" />
+
+### Blackbox_modules
+
+<img width="721" height="390" alt="image" src="https://github.com/user-attachments/assets/5021ffe3-27ca-4088-9268-6ed726b5a9e3" />
+
+
