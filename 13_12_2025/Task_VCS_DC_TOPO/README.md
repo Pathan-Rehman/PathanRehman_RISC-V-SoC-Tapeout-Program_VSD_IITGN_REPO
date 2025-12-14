@@ -1026,4 +1026,132 @@ After synthesis report files will be generated in the report directory such as a
 
 <img width="721" height="390" alt="image" src="https://github.com/user-attachments/assets/5021ffe3-27ca-4088-9268-6ed726b5a9e3" />
 
+# GLS Setup
+
+- As we made 3 modules as blackbox we need to add it's RTL Functionality to pass the GL Test, so we need to include those files in caravel_netlist.v
+- Copy all rtl files into gl directory, then edit the Makefile as per below.
+
+```
+# SPDX-FileCopyrightText: 2020 Efabless Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+scl_io_PATH = "/home/Synopsys/pdk/SCL_PDK_3/SCLPDK_V3.0_KIT/scl180/iopad/cio250/4M1L/verilog/tsl18cio250/zero"
+scl_io_wrapper_PATH = ../rtl/scl180_wrapper
+VERILOG_PATH = ../
+RTL_PATH = $(VERILOG_PATH)/rtl
+GL_PATH = $(VERILOG_PATH)/gl
+BEHAVIOURAL_MODELS = ../gls
+RISCV_TYPE ?= rv32imc
+PDK_PATH = /home/Synopsys/pdk/SCL_PDK_3/SCLPDK_V3.0_KIT/scl180/stdcell/fs120/4M1IL/verilog/vcs_sim_model 
+FIRMWARE_PATH = ../gls
+GCC_PATH?=/home/prakhan/rehman/riscv32-unknown-elf/bin
+GCC_PREFIX?=riscv32-unknown-elf
+
+SIM_DEFINES = +define+FUNCTIONAL +define+SIM
+SIM?=gl
+
+.SUFFIXES:
+
+PATTERN = hkspi
+
+all: ${PATTERN:=.vcd}
+hex: ${PATTERN:=.hex}
+vcd: ${PATTERN:=.vcd}
+
+# VCS compilation target
+simv: ${PATTERN}_tb.v ${PATTERN}.hex
+	 vcs -full64 -debug_access+all \
+	 $(SIM_DEFINES) +define+GL \
+	 -timescale=1ns/1ps \
+	 +v2k -sverilog \
+	 -lca -kdb \
+	 +incdir+$(VERILOG_PATH) \
+	 +incdir+$(VERILOG_PATH)/synthesis/output \
+	 +incdir+$(BEHAVIOURAL_MODELS) \
+	 +incdir+$(RTL_PATH) \
+	 +incdir+$(GL_PATH) \
+	 +incdir+$(scl_io_wrapper_PATH) \
+	 +incdir+$(scl_io_PATH) \
+	 +incdir+$(PDK_PATH) \
+	 -y $(scl_io_wrapper_PATH) +libext+.v+.sv \
+	 -y $(RTL_PATH) +libext+.v+.sv \
+	 -y $(GL_PATH) +libext+.v+.sv \
+	 -y $(scl_io_PATH) +libext+.v+.sv \
+	 -y $(PDK_PATH) +libext+.v+.sv \
+	 $(GL_PATH)/defines.v \
+	 $< \
+	 -l vcs_compile.log \
+	 -o simv
+
+# Run simulation and generate VCD
+%.vcd: simv
+	 ./simv +vcs+dumpvars+${PATTERN}.vcd \
+	 -l simulation.log
+
+# Alternative: Generate FSDB waveform (if Verdi is available)
+%.fsdb: simv
+	 ./simv -ucli -do "dump -file ${PATTERN}.fsdb -type fsdb -add {*}" \
+	 -l simulation.log
+
+%.elf: %.c $(FIRMWARE_PATH)/sections.lds $(FIRMWARE_PATH)/start.s
+	 ${GCC_PATH}/${GCC_PREFIX}-gcc -march=$(RISCV_TYPE) -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -o $@ $(FIRMWARE_PATH)/start.s $<
+
+%.hex: %.elf
+	 ${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@ 
+ # to fix flash base address
+	 sed -i 's/@10000000/@00000000/g' $@
+
+%.bin: %.elf
+	 ${GCC_PATH}/${GCC_PREFIX}-objcopy -O binary $< /dev/stdout | tail -c +1048577 > $@
+
+# Interactive debug with DVE
+debug: simv
+	 ./simv -gui -l simulation.log
+
+# Coverage report generation (optional)
+coverage: simv
+	 ./simv -cm line+cond+fsm+tgl -cm_dir coverage.vdb
+	 urg -dir coverage.vdb -report urgReport
+
+check-env:
+ifeq (,$(wildcard $(GCC_PATH)/$(GCC_PREFIX)-gcc ))
+	 $(error $(GCC_PATH)/$(GCC_PREFIX)-gcc is not found, please export GCC_PATH and GCC_PREFIX before running make)
+endif
+
+clean:
+	 rm -f *.elf *.hex *.bin *.vcd *.fsdb *.log simv
+	 rm -rf csrc simv.daidir DVEfiles ucli.key *.vpd urgReport coverage.vdb AN.DB
+
+.PHONY: clean hex vcd fsdb all debug coverage check-env# SPDX-FileCopyrightText: 2020 Efabless Corporation
+
+
+```
+then run the following commands
+
+- make clean
+- Then copy the hkspi.hex file from dv/hkspi
+- Then run `make`
+<img width="834" height="802" alt="image" src="https://github.com/user-attachments/assets/21b1f9ee-d004-4eb5-a6f1-9493bd87f120" />
+<img width="681" height="474" alt="image" src="https://github.com/user-attachments/assets/e49de8ac-7ab8-41a2-9db3-11db060da455" />
+- To view the waveform use vcd file and open it using gtkwave 
+<img width="1668" height="964" alt="image" src="https://github.com/user-attachments/assets/e7dc194a-9cc5-4e58-aab1-1cb299930546" />
+
+Synopsys Solvnet References
+
+<img width="1910" height="602" alt="image" src="https://github.com/user-attachments/assets/750524ef-280c-43a7-975d-ef0f4e79b6b1" />
+
+- To perform the synthesis in topological method we need to use `compile_ultra -incremental` instead of `compile` in tcl file, this do the synthesis in topological method.
 
