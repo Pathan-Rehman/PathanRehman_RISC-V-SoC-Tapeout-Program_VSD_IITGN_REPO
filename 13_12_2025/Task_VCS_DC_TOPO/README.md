@@ -1151,7 +1151,7 @@ then run the following commands
 
 <img width="1668" height="964" alt="image" src="https://github.com/user-attachments/assets/e7dc194a-9cc5-4e58-aab1-1cb299930546" />
 
-Synopsys Solvnet References
+## Synopsys Solvnet References
 
 <img width="1910" height="602" alt="image" src="https://github.com/user-attachments/assets/750524ef-280c-43a7-975d-ef0f4e79b6b1" />
 
