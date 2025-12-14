@@ -495,7 +495,7 @@ if {[file exists "$root_dir/synthesis/vsdcaravel.sdc"]} {
 # Compile Design (Basic synthesis)
 # ========================================================================
 puts "INFO: Starting compilation..."
-compile
+compile_ultra -incremental
 
 # ========================================================================
 # Write Outputs
