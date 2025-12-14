@@ -1146,7 +1146,9 @@ then run the following commands
 - Then run `make`
 <img width="834" height="802" alt="image" src="https://github.com/user-attachments/assets/21b1f9ee-d004-4eb5-a6f1-9493bd87f120" />
 <img width="681" height="474" alt="image" src="https://github.com/user-attachments/assets/e49de8ac-7ab8-41a2-9db3-11db060da455" />
-- To view the waveform use vcd file and open it using gtkwave 
+
+- To view the waveform use vcd file and open it using gtkwave
+
 <img width="1668" height="964" alt="image" src="https://github.com/user-attachments/assets/e7dc194a-9cc5-4e58-aab1-1cb299930546" />
 
 Synopsys Solvnet References
