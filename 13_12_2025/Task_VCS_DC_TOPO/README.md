@@ -1029,6 +1029,10 @@ After synthesis report files will be generated in the report directory such as a
 # GLS Setup
 
 - As we made 3 modules as blackbox we need to add it's RTL Functionality to pass the GL Test, so we need to include those files in caravel_netlist.v
+  
+<img width="1533" height="884" alt="image" src="https://github.com/user-attachments/assets/f938072a-1ba6-4910-8918-12c82c22b554" />
+<img width="790" height="508" alt="image" src="https://github.com/user-attachments/assets/bc9d7196-6338-40b5-9c3a-baedd7cad826" />
+
 - Copy all rtl files into gl directory, then edit the Makefile as per below.
 
 ```
