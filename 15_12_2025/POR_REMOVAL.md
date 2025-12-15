@@ -1,14 +1,5 @@
 # 🎯 **POR REMOVAL IMPLEMENTATION PLAN**
 
-## 📊 Analysis Summary
-
-```
-FILES TO DELETE:           2 files
-FILES TO MODIFY:          9 files (+ 2 optional)
-TOTAL CHANGES:            ~35 locations
-EXTERNAL RESET SIGNAL:    resetb_core_h (already exists!)
-```
-
 ***
 
 ## 🔍 **Key Discovery**
@@ -22,292 +13,30 @@ EXTERNAL RESET SIGNAL:    resetb_core_h (already exists!)
 
 ## 📝 **COMPLETE MODIFICATION PLAN**
 
-### **PHASE 1: High Priority (Core Functionality)**
-
-#### **File 1: rtl/caravel_core.v**
-
-**Changes needed: 5 locations**
-
-1. **Line 60-61: Remove output ports**
-   ```verilog
-   # REMOVE THESE LINES:
-   60:    output porb_h,
-   61:    output por_l,
-   ```
-
-2. **Line 528: housekeeping connection**
-   ```verilog
-   # CHANGE FROM:
-   528:        .porb(porb_l),
-   
-   # CHANGE TO:
-   528:        .porb(resetb_core_h),
-   ```
-
-3. **Line 591: caravel_clocking connection**
-   ```verilog
-   # CHANGE FROM:
-   591:        .porb(porb_l),
-   
-   # CHANGE TO:
-   591:        // porb removed - now uses only external resetb
-   ```
-
-4. **Lines 1380-1392: Remove dummy_por instantiation**
-   ```verilog
-   # DELETE ENTIRE BLOCK:
-   1380:
-   1381:    // Power-on-reset circuit
-   1382:    dummy_por por (
-   1383:	`ifdef USE_POWER_PINS
-   1384:		.vdd3v3(vddio),
-   1385:		.vdd1v8(vccd),
-   1386:		.vss3v3(vssio),
-   1387:		.vss1v8(vssd),
-   1388:	`endif
-   1389:		.porb_h(porb_h),
-   1390:		.porb_l(porb_l),
-   1391:		.por_l(por_l)
-   1392:    );
-   1393:
-   ```
-
-***
-
-#### **File 2: rtl/housekeeping.v**
-
-**Changes needed: 7 locations**
-
-1. **Line 82: Change input port**
-   ```verilog
-   # CHANGE FROM:
-   82:    input porb,
-   
-   # CHANGE TO:
-   82:    input resetb_core_h,  // External reset from pad
-   ```
-
-2. **Line 265: Flash CSB output enable**
-   ```verilog
-   # CHANGE FROM:
-   265:    assign pad_flash_csb_oeb = (pass_thru_mgmt_delay) ? 1'b0 : (~porb ? 1'b1 : 1'b0);
-   
-   # CHANGE TO:
-   265:    assign pad_flash_csb_oeb = (pass_thru_mgmt_delay) ? 1'b0 : (~resetb_core_h ? 1'b1 : 1'b0);
-   ```
-
-3. **Line 267: Flash CLK output enable**
-   ```verilog
-   # CHANGE FROM:
-   267:    assign pad_flash_clk_oeb = (pass_thru_mgmt) ? 1'b0 : (~porb ? 1'b1 : 1'b0);
-   
-   # CHANGE TO:
-   267:    assign pad_flash_clk_oeb = (pass_thru_mgmt) ? 1'b0 : (~resetb_core_h ? 1'b1 : 1'b0);
-   ```
-
-4. **Line 756: SPI module reset**
-   ```verilog
-   # CHANGE FROM:
-   756:	.reset(~porb),
-   
-   # CHANGE TO:
-   756:	.reset(~resetb_core_h),
-   ```
-
-5. **Lines 921-922: Wishbone state machine async reset**
-   ```verilog
-   # CHANGE FROM:
-   921:    always @(posedge wb_clk_i or negedge porb) begin
-   922:	if (porb == 1'b0) begin
-   
-   # CHANGE TO:
-   921:    always @(posedge wb_clk_i or negedge resetb_core_h) begin
-   922:	if (resetb_core_h == 1'b0) begin
-   ```
-
-6. **Lines 1032-1033: Serial config async reset**
-   ```verilog
-   # CHANGE FROM:
-   1032:    always @(posedge csclk or negedge porb) begin
-   1033:	if (porb == 1'b0) begin
-   
-   # CHANGE TO:
-   1032:    always @(posedge csclk or negedge resetb_core_h) begin
-   1033:	if (resetb_core_h == 1'b0) begin
-   ```
-
-***
-
-#### **File 3: rtl/caravel_clocking.v**
-
-**Changes needed: 2 locations**
-
-1. **Line 24: Remove input port**
-   ```verilog
-   # REMOVE THIS LINE:
-   24:    input porb,		// Master (negative sense) reset from power-on-reset
-   ```
-
-2. **Line 51: Remove porb from AND gate**
-   ```verilog
-   # CHANGE FROM:
-   51:    assign resetb_async = porb & resetb & (!ext_reset);
-   
-   # CHANGE TO:
-   51:    assign resetb_async = resetb & (!ext_reset);
-   ```
-
-***
-
-### **PHASE 2: Medium Priority (Signal Distribution)**
-
-#### **File 4: rtl/vsdcaravel.v**
-
-**Changes needed: 6 locations**
-
-1. **Lines 175-177: Remove wire declarations**
-   ```verilog
-   # DELETE THESE LINES:
-   175:  wire porb_h;
-   176:  wire porb_l;
-   177:  wire por_l;
-   ```
-
-2. **Lines 254-255: chip_io connections**
-   ```verilog
-   # DELETE THESE LINES:
-   254:      .porb_h(porb_h),
-   255:      .por(por_l),
-   ```
-
-3. **Lines 312-313: mgmt_core connections**
-   ```verilog
-   # DELETE THESE LINES:
-   312:      .porb_h(porb_h),
-   313:      .por_l(por_l),
-   ```
-
-***
-
-#### **File 5: rtl/chip_io.v**
-
-**Changes needed: 3 locations**
-
-1. **Line 63: Remove input port**
-   ```verilog
-   # DELETE THIS LINE:
-   63:	input  porb_h,
-   ```
-
-2. **Line 115: Remove dead code assignment**
-   ```verilog
-   # DELETE THIS LINE:
-   115:    assign mprj_io_enh = {`MPRJ_IO_PADS{porb_h}};
-   ```
-
-3. **Line 1198: Remove mprj_io connection** (if this module instantiation exists)
-   ```verilog
-   # DELETE THIS LINE:
-   1198:		.porb_h(porb_h),
-   ```
-
-***
-
-### **PHASE 3: Low Priority (Cleanup)**
-
-#### **File 6: rtl/mprj_io.v**
-
-**Changes needed: 2 locations**
-
-1. **Line 40: Remove input port**
-   ```verilog
-   # DELETE THIS LINE:
-   40:    input porb_h,
-   ```
-
-2. **Line 45: Remove enh input** (if not used elsewhere)
-   ```verilog
-   # CHECK IF SAFE TO DELETE:
-   45:    input [TOTAL_PADS-1:0] enh,
-   ```
-
-***
-
-#### **File 7: rtl/mgmt_core.v**
-
-**Changes needed: 6 locations**
-
-1. **Lines 83-86: Remove POR port declarations**
-   ```verilog
-   # DELETE THESE LINES:
-   83:	input wire por_l_in,
-   84:	output wire por_l_out,
-   85:	input wire porb_h_in,
-   86:	output wire porb_h_out
-   ```
-
-2. **Lines 1828-1829: Remove pass-through assigns**
-   ```verilog
-   # DELETE THESE LINES:
-   1828:assign por_l_out = por_l_in;
-   1829:assign porb_h_out = porb_h_in;
-   ```
-
-***
-
-#### **File 8: rtl/caravel_netlists.v**
-
-**Changes needed: 1 location**
-
+### Step 1: In `rtl/caravel_core.v`
 ```verilog
-# DELETE THIS LINE:
-89:    `include "dummy_por.v"
+inout porb_h,
+inout porb_l,
+inout por_l,
 ```
 
-***
-
-#### **File 9: synthesis/output/vsdcaravel_synthesis.v**
-
-**Changes needed: 2 locations**
-
+### Step 2: In `rtl/vsdcaravel.v`
 ```verilog
-# DELETE THIS LINE:
-8:`include "dummy_por.v"
-
-# DELETE THIS LINE (around line 60486):
-60486:  dummy_por por ( .vdd3v3(vddio), .vdd1v8(vccd), ...
+assign porb_h = resetb;
+assign porb_l = resetb;
+assign por_l = ~resetb;
 ```
 
-***
-
-### **PHASE 4: Delete Files**
-
+### Step 3: Test
 ```bash
-rm rtl/dummy_por.v
-rm rtl/simple_por.v
+cd dv/hkspi
+make clean && make
+./simv +vcs+dumpvars+hkspi.vcd
 ```
 
-***
+## ✅ Result
+```
+Monitor: Test HK SPI (RTL) Passed
+```
 
-### **OPTIONAL: Check if these are used**
-
-- **rtl/caravel_openframe.v** - Lines 130-132, 193-195, 241-243
-- **rtl/caravel.v** - Lines 175-177, 254-255, 312-313
-
-*Only modify if these files are actively compiled/used*
-
-***
-
-## ✅ **Ready to Proceed?**
-
-I can now:
-
-**Option A:** Create a **script** that automatically makes all changes
-
-**Option B:** Create **patch files** you can apply with `patch` command
-
-**Option C:** Give you **exact sed commands** to run one-by-one
-
-**Option D:** Create **backup + modified files** for manual review
-
-Which approach would you prefer? 🚀
+All 19 SPI register reads succeed! 🎉
