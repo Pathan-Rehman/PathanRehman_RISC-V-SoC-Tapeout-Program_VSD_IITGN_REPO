@@ -43,3 +43,6 @@ Monitor: Test HK SPI (RTL) Passed
 
 
 All 19 SPI register reads succeed! 🎉
+
+
+# Removed on-chip POR; migrated to external reset-only architecture
