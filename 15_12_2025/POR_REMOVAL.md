@@ -13,12 +13,10 @@
 
 ## 📝 **COMPLETE MODIFICATION PLAN**
 
-### Step 1: In `rtl/caravel_core.v`
-```verilog
-inout porb_h,
-inout porb_l,
-inout por_l,
-```
+## Step 1: Made the Dummy_por module commented 
+
+<img width="714" height="596" alt="image" src="https://github.com/user-attachments/assets/1656ca3e-b592-4d47-bf9a-578c263cd913" />
+
 
 ### Step 2: In `rtl/vsdcaravel.v`
 ```verilog
@@ -26,6 +24,9 @@ assign porb_h = resetb;
 assign porb_l = resetb;
 assign por_l = ~resetb;
 ```
+
+<img width="713" height="478" alt="image" src="https://github.com/user-attachments/assets/d55b8a08-fd25-485d-bb52-a54feb87059f" />
+
 
 ### Step 3: Test
 ```bash
@@ -38,5 +39,7 @@ make clean && make
 ```
 Monitor: Test HK SPI (RTL) Passed
 ```
+<img width="732" height="662" alt="image" src="https://github.com/user-attachments/assets/d39d003e-c690-4cbe-8b13-045e2ea2d5a5" />
+
 
 All 19 SPI register reads succeed! 🎉
