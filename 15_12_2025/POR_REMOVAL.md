@@ -164,13 +164,6 @@ puts $fp "  output \[31:0\] Do0;"
 puts $fp "endmodule"
 puts $fp ""
 
-# dummy_por blackbox
-puts $fp "(* blackbox *)"
-puts $fp "module dummy_por(vdd3v3, vdd1v8, vss3v3, vss1v8, porb_h, porb_l, por_l);"
-puts $fp "  inout vdd3v3, vdd1v8, vss3v3, vss1v8;"
-puts $fp "  output porb_h, porb_l, por_l;"
-puts $fp "endmodule"
-puts $fp ""
 
 close $fp
 puts "INFO: Created blackbox stub file: $blackbox_file"
