@@ -594,14 +594,14 @@ dummy_por (caravel_core.v line 1382)
 
 | Block | Module | Dependencies | Type | Replaceable? |
 |-------|--------|--------------|------|-------------|
-| **Housekeeping SPI Control** | housekeeping.v | porb_l | Reset signal | ✅ Yes (use resetb) |
-| **Housekeeping Flash Control** | housekeeping.v | porb_l | Output disable | ✅ Yes (use resetb) |
-| **WB State Machine** | housekeeping.v | porb_l | Async reset | ✅ Yes (use resetb) |
-| **Serial Config** | housekeeping.v | porb_l | Async reset | ✅ Yes (use resetb) |
-| **Clock Control** | caravel_clocking.v | porb_l | AND gate input | ✅ Yes (remove &) |
-| **SPI Reset** | housekeeping_spi | ~porb_l | Active-high reset | ✅ Yes (use ~resetb) |
-| **Pad Enables** | chip_io/mprj_io | porb_h | ENABLE_H | ✅ Yes (remove - dead code) |
-| **Management Core** | mgmt_core | porb_h/por_l | Pass-through | ✅ Yes (remove) |
+| **Housekeeping SPI Control** | housekeeping.v | porb_l | Reset signal | ✅ Yes |
+| **Housekeeping Flash Control** | housekeeping.v | porb_l | Output disable | ✅ Yes |
+| **WB State Machine** | housekeeping.v | porb_l | Async reset | ✅ Yes |
+| **Serial Config** | housekeeping.v | porb_l | Async reset | ✅ Yes |
+| **Clock Control** | caravel_clocking.v | porb_l | AND gate input | ✅ Yes |
+| **SPI Reset** | housekeeping_spi | ~porb_l | Active-high reset | ✅ Yes |
+| **Pad Enables** | chip_io/mprj_io | porb_h | ENABLE_H | ✅ Yes |
+| **Management Core** | mgmt_core | porb_h/por_l | Pass-through | ✅ Yes |
 
 **Conclusion:** ALL POR dependencies can be replaced with external `resetb` signal
 
