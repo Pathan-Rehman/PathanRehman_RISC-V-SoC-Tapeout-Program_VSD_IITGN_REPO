@@ -561,6 +561,7 @@ then run the following commands
 
 - To view the waveform use vcd file and open it using gtkwave
 
-<img width="1668" height="964" alt="image" src="https://github.com/user-attachments/assets/e7dc194a-9cc5-4e58-aab1-1cb299930546" />
+<img width="1000" height="639" alt="image" src="https://github.com/user-attachments/assets/8f5dc601-08ff-4797-8d90-adc9e81fb4e3" />
+
 
 # Removed on-chip POR; migrated to external reset-only architecture
