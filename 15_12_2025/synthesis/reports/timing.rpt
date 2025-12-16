@@ -1,0 +1,406 @@
+Warning: Design 'vsdcaravel' has '2' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 10
+Design : vsdcaravel
+Version: T-2022.03-SP5
+Date   : Tue Dec 16 13:55:19 2025
+****************************************
+
+Operating Conditions: tsl18cio250_min   Library: tsl18cio250_min
+Wire Load Model Mode: enclosed
+
+  Startpoint: chip_core/gpio_control_in_2[1]/shift_register_reg[12]
+              (rising edge-triggered flip-flop clocked by hk_serial_clk)
+  Endpoint: chip_core/gpio_control_in_2[1]/serial_data_out_reg
+            (falling edge-triggered flip-flop clocked by hk_serial_clk)
+  Path Group: hk_serial_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  caravel_core       1000000               tsl18cio250_min
+  gpio_control_block_1
+                     4000                  tsl18cio250_min
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock hk_serial_clk (rise edge)                         0.00       0.00
+  clock network delay (propagated)                        7.40       7.40
+  chip_core/gpio_control_in_2[1]/shift_register_reg[12]/CP (dfcrq1)
+                                                          0.00       7.40 r
+  chip_core/gpio_control_in_2[1]/shift_register_reg[12]/Q (dfcrq1)
+                                                          0.23       7.62 f
+  chip_core/gpio_control_in_2[1]/serial_data_out_reg/D (dfcfq1)
+                                                          0.00       7.62 f
+  data arrival time                                                  7.62
+
+  clock hk_serial_clk (fall edge)                        50.00      50.00
+  clock network delay (propagated)                        5.78      55.78
+  clock uncertainty                                      -0.10      55.68
+  chip_core/gpio_control_in_2[1]/serial_data_out_reg/CPN (dfcfq1)
+                                                          0.00      55.68 f
+  library setup time                                      0.00      55.68
+  data required time                                                55.68
+  --------------------------------------------------------------------------
+  data required time                                                55.68
+  data arrival time                                                 -7.62
+  --------------------------------------------------------------------------
+  slack (MET)                                                       48.05
+
+
+  Startpoint: chip_core/gpio_control_in_1[9]/shift_register_reg[12]
+              (rising edge-triggered flip-flop clocked by hk_serial_clk)
+  Endpoint: chip_core/gpio_control_in_1[9]/serial_data_out_reg
+            (falling edge-triggered flip-flop clocked by hk_serial_clk)
+  Path Group: hk_serial_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  caravel_core       1000000               tsl18cio250_min
+  gpio_control_block_28
+                     4000                  tsl18cio250_min
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock hk_serial_clk (rise edge)                         0.00       0.00
+  clock network delay (propagated)                        7.01       7.01
+  chip_core/gpio_control_in_1[9]/shift_register_reg[12]/CP (dfcrq1)
+                                                          0.00       7.01 r
+  chip_core/gpio_control_in_1[9]/shift_register_reg[12]/Q (dfcrq1)
+                                                          0.23       7.23 f
+  chip_core/gpio_control_in_1[9]/serial_data_out_reg/D (dfcfq1)
+                                                          0.00       7.23 f
+  data arrival time                                                  7.23
+
+  clock hk_serial_clk (fall edge)                        50.00      50.00
+  clock network delay (propagated)                        5.47      55.47
+  clock uncertainty                                      -0.10      55.37
+  chip_core/gpio_control_in_1[9]/serial_data_out_reg/CPN (dfcfq1)
+                                                          0.00      55.37 f
+  library setup time                                      0.00      55.37
+  data required time                                                55.37
+  --------------------------------------------------------------------------
+  data required time                                                55.37
+  data arrival time                                                 -7.23
+  --------------------------------------------------------------------------
+  slack (MET)                                                       48.14
+
+
+  Startpoint: chip_core/gpio_control_in_2[2]/shift_register_reg[12]
+              (rising edge-triggered flip-flop clocked by hk_serial_clk)
+  Endpoint: chip_core/gpio_control_in_2[2]/serial_data_out_reg
+            (falling edge-triggered flip-flop clocked by hk_serial_clk)
+  Path Group: hk_serial_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  caravel_core       1000000               tsl18cio250_min
+  gpio_control_block_2
+                     4000                  tsl18cio250_min
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock hk_serial_clk (rise edge)                         0.00       0.00
+  clock network delay (propagated)                        7.01       7.01
+  chip_core/gpio_control_in_2[2]/shift_register_reg[12]/CP (dfcrq1)
+                                                          0.00       7.01 r
+  chip_core/gpio_control_in_2[2]/shift_register_reg[12]/Q (dfcrq1)
+                                                          0.23       7.23 f
+  chip_core/gpio_control_in_2[2]/serial_data_out_reg/D (dfcfq1)
+                                                          0.00       7.23 f
+  data arrival time                                                  7.23
+
+  clock hk_serial_clk (fall edge)                        50.00      50.00
+  clock network delay (propagated)                        5.47      55.47
+  clock uncertainty                                      -0.10      55.37
+  chip_core/gpio_control_in_2[2]/serial_data_out_reg/CPN (dfcfq1)
+                                                          0.00      55.37 f
+  library setup time                                      0.00      55.37
+  data required time                                                55.37
+  --------------------------------------------------------------------------
+  data required time                                                55.37
+  data arrival time                                                 -7.23
+  --------------------------------------------------------------------------
+  slack (MET)                                                       48.14
+
+
+  Startpoint: chip_core/gpio_control_in_1[8]/shift_register_reg[12]
+              (rising edge-triggered flip-flop clocked by hk_serial_clk)
+  Endpoint: chip_core/gpio_control_in_1[8]/serial_data_out_reg
+            (falling edge-triggered flip-flop clocked by hk_serial_clk)
+  Path Group: hk_serial_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  caravel_core       1000000               tsl18cio250_min
+  gpio_control_block_27
+                     4000                  tsl18cio250_min
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock hk_serial_clk (rise edge)                         0.00       0.00
+  clock network delay (propagated)                        6.62       6.62
+  chip_core/gpio_control_in_1[8]/shift_register_reg[12]/CP (dfcrq1)
+                                                          0.00       6.62 r
+  chip_core/gpio_control_in_1[8]/shift_register_reg[12]/Q (dfcrq1)
+                                                          0.23       6.84 f
+  chip_core/gpio_control_in_1[8]/serial_data_out_reg/D (dfcfq1)
+                                                          0.00       6.84 f
+  data arrival time                                                  6.84
+
+  clock hk_serial_clk (fall edge)                        50.00      50.00
+  clock network delay (propagated)                        5.16      55.16
+  clock uncertainty                                      -0.10      55.06
+  chip_core/gpio_control_in_1[8]/serial_data_out_reg/CPN (dfcfq1)
+                                                          0.00      55.06 f
+  library setup time                                      0.00      55.07
+  data required time                                                55.07
+  --------------------------------------------------------------------------
+  data required time                                                55.07
+  data arrival time                                                 -6.84
+  --------------------------------------------------------------------------
+  slack (MET)                                                       48.22
+
+
+  Startpoint: chip_core/gpio_control_in_2[3]/shift_register_reg[12]
+              (rising edge-triggered flip-flop clocked by hk_serial_clk)
+  Endpoint: chip_core/gpio_control_in_2[3]/serial_data_out_reg
+            (falling edge-triggered flip-flop clocked by hk_serial_clk)
+  Path Group: hk_serial_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  caravel_core       1000000               tsl18cio250_min
+  gpio_control_block_3
+                     4000                  tsl18cio250_min
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock hk_serial_clk (rise edge)                         0.00       0.00
+  clock network delay (propagated)                        6.62       6.62
+  chip_core/gpio_control_in_2[3]/shift_register_reg[12]/CP (dfcrq1)
+                                                          0.00       6.62 r
+  chip_core/gpio_control_in_2[3]/shift_register_reg[12]/Q (dfcrq1)
+                                                          0.23       6.84 f
+  chip_core/gpio_control_in_2[3]/serial_data_out_reg/D (dfcfq1)
+                                                          0.00       6.84 f
+  data arrival time                                                  6.84
+
+  clock hk_serial_clk (fall edge)                        50.00      50.00
+  clock network delay (propagated)                        5.16      55.16
+  clock uncertainty                                      -0.10      55.06
+  chip_core/gpio_control_in_2[3]/serial_data_out_reg/CPN (dfcfq1)
+                                                          0.00      55.06 f
+  library setup time                                      0.00      55.07
+  data required time                                                55.07
+  --------------------------------------------------------------------------
+  data required time                                                55.07
+  data arrival time                                                 -6.84
+  --------------------------------------------------------------------------
+  slack (MET)                                                       48.22
+
+
+  Startpoint: chip_core/gpio_control_in_1[7]/shift_register_reg[12]
+              (rising edge-triggered flip-flop clocked by hk_serial_clk)
+  Endpoint: chip_core/gpio_control_in_1[7]/serial_data_out_reg
+            (falling edge-triggered flip-flop clocked by hk_serial_clk)
+  Path Group: hk_serial_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  caravel_core       1000000               tsl18cio250_min
+  gpio_control_block_26
+                     4000                  tsl18cio250_min
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock hk_serial_clk (rise edge)                         0.00       0.00
+  clock network delay (propagated)                        6.23       6.23
+  chip_core/gpio_control_in_1[7]/shift_register_reg[12]/CP (dfcrq1)
+                                                          0.00       6.23 r
+  chip_core/gpio_control_in_1[7]/shift_register_reg[12]/Q (dfcrq1)
+                                                          0.23       6.46 f
+  chip_core/gpio_control_in_1[7]/serial_data_out_reg/D (dfcfq1)
+                                                          0.00       6.46 f
+  data arrival time                                                  6.46
+
+  clock hk_serial_clk (fall edge)                        50.00      50.00
+  clock network delay (propagated)                        4.86      54.86
+  clock uncertainty                                      -0.10      54.76
+  chip_core/gpio_control_in_1[7]/serial_data_out_reg/CPN (dfcfq1)
+                                                          0.00      54.76 f
+  library setup time                                      0.00      54.76
+  data required time                                                54.76
+  --------------------------------------------------------------------------
+  data required time                                                54.76
+  data arrival time                                                 -6.46
+  --------------------------------------------------------------------------
+  slack (MET)                                                       48.30
+
+
+  Startpoint: chip_core/gpio_control_in_2[4]/shift_register_reg[12]
+              (rising edge-triggered flip-flop clocked by hk_serial_clk)
+  Endpoint: chip_core/gpio_control_in_2[4]/serial_data_out_reg
+            (falling edge-triggered flip-flop clocked by hk_serial_clk)
+  Path Group: hk_serial_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  caravel_core       1000000               tsl18cio250_min
+  gpio_control_block_4
+                     4000                  tsl18cio250_min
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock hk_serial_clk (rise edge)                         0.00       0.00
+  clock network delay (propagated)                        6.23       6.23
+  chip_core/gpio_control_in_2[4]/shift_register_reg[12]/CP (dfcrq1)
+                                                          0.00       6.23 r
+  chip_core/gpio_control_in_2[4]/shift_register_reg[12]/Q (dfcrq1)
+                                                          0.23       6.46 f
+  chip_core/gpio_control_in_2[4]/serial_data_out_reg/D (dfcfq1)
+                                                          0.00       6.46 f
+  data arrival time                                                  6.46
+
+  clock hk_serial_clk (fall edge)                        50.00      50.00
+  clock network delay (propagated)                        4.86      54.86
+  clock uncertainty                                      -0.10      54.76
+  chip_core/gpio_control_in_2[4]/serial_data_out_reg/CPN (dfcfq1)
+                                                          0.00      54.76 f
+  library setup time                                      0.00      54.76
+  data required time                                                54.76
+  --------------------------------------------------------------------------
+  data required time                                                54.76
+  data arrival time                                                 -6.46
+  --------------------------------------------------------------------------
+  slack (MET)                                                       48.30
+
+
+  Startpoint: chip_core/gpio_control_in_1[6]/shift_register_reg[12]
+              (rising edge-triggered flip-flop clocked by hk_serial_clk)
+  Endpoint: chip_core/gpio_control_in_1[6]/serial_data_out_reg
+            (falling edge-triggered flip-flop clocked by hk_serial_clk)
+  Path Group: hk_serial_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  caravel_core       1000000               tsl18cio250_min
+  gpio_control_block_25
+                     4000                  tsl18cio250_min
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock hk_serial_clk (rise edge)                         0.00       0.00
+  clock network delay (propagated)                        5.84       5.84
+  chip_core/gpio_control_in_1[6]/shift_register_reg[12]/CP (dfcrq1)
+                                                          0.00       5.84 r
+  chip_core/gpio_control_in_1[6]/shift_register_reg[12]/Q (dfcrq1)
+                                                          0.23       6.07 f
+  chip_core/gpio_control_in_1[6]/serial_data_out_reg/D (dfcfq1)
+                                                          0.00       6.07 f
+  data arrival time                                                  6.07
+
+  clock hk_serial_clk (fall edge)                        50.00      50.00
+  clock network delay (propagated)                        4.55      54.55
+  clock uncertainty                                      -0.10      54.45
+  chip_core/gpio_control_in_1[6]/serial_data_out_reg/CPN (dfcfq1)
+                                                          0.00      54.45 f
+  library setup time                                      0.00      54.45
+  data required time                                                54.45
+  --------------------------------------------------------------------------
+  data required time                                                54.45
+  data arrival time                                                 -6.07
+  --------------------------------------------------------------------------
+  slack (MET)                                                       48.39
+
+
+  Startpoint: chip_core/gpio_control_in_2[5]/shift_register_reg[12]
+              (rising edge-triggered flip-flop clocked by hk_serial_clk)
+  Endpoint: chip_core/gpio_control_in_2[5]/serial_data_out_reg
+            (falling edge-triggered flip-flop clocked by hk_serial_clk)
+  Path Group: hk_serial_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  caravel_core       1000000               tsl18cio250_min
+  gpio_control_block_5
+                     4000                  tsl18cio250_min
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock hk_serial_clk (rise edge)                         0.00       0.00
+  clock network delay (propagated)                        5.84       5.84
+  chip_core/gpio_control_in_2[5]/shift_register_reg[12]/CP (dfcrq1)
+                                                          0.00       5.84 r
+  chip_core/gpio_control_in_2[5]/shift_register_reg[12]/Q (dfcrq1)
+                                                          0.23       6.07 f
+  chip_core/gpio_control_in_2[5]/serial_data_out_reg/D (dfcfq1)
+                                                          0.00       6.07 f
+  data arrival time                                                  6.07
+
+  clock hk_serial_clk (fall edge)                        50.00      50.00
+  clock network delay (propagated)                        4.55      54.55
+  clock uncertainty                                      -0.10      54.45
+  chip_core/gpio_control_in_2[5]/serial_data_out_reg/CPN (dfcfq1)
+                                                          0.00      54.45 f
+  library setup time                                      0.00      54.45
+  data required time                                                54.45
+  --------------------------------------------------------------------------
+  data required time                                                54.45
+  data arrival time                                                 -6.07
+  --------------------------------------------------------------------------
+  slack (MET)                                                       48.39
+
+
+  Startpoint: chip_core/gpio_control_in_1[5]/shift_register_reg[12]
+              (rising edge-triggered flip-flop clocked by hk_serial_clk)
+  Endpoint: chip_core/gpio_control_in_1[5]/serial_data_out_reg
+            (falling edge-triggered flip-flop clocked by hk_serial_clk)
+  Path Group: hk_serial_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  caravel_core       1000000               tsl18cio250_min
+  gpio_control_block_24
+                     4000                  tsl18cio250_min
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock hk_serial_clk (rise edge)                         0.00       0.00
+  clock network delay (propagated)                        5.45       5.45
+  chip_core/gpio_control_in_1[5]/shift_register_reg[12]/CP (dfcrq1)
+                                                          0.00       5.45 r
+  chip_core/gpio_control_in_1[5]/shift_register_reg[12]/Q (dfcrq1)
+                                                          0.23       5.68 f
+  chip_core/gpio_control_in_1[5]/serial_data_out_reg/D (dfcfq1)
+                                                          0.00       5.68 f
+  data arrival time                                                  5.68
+
+  clock hk_serial_clk (fall edge)                        50.00      50.00
+  clock network delay (propagated)                        4.24      54.24
+  clock uncertainty                                      -0.10      54.14
+  chip_core/gpio_control_in_1[5]/serial_data_out_reg/CPN (dfcfq1)
+                                                          0.00      54.14 f
+  library setup time                                      0.00      54.14
+  data required time                                                54.14
+  --------------------------------------------------------------------------
+  data required time                                                54.14
+  data arrival time                                                 -5.68
+  --------------------------------------------------------------------------
+  slack (MET)                                                       48.47
+
+
+1

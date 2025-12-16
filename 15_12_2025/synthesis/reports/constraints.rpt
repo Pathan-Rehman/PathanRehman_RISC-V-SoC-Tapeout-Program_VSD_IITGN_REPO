@@ -1,0 +1,870 @@
+Warning: Design 'vsdcaravel' has '2' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : constraint
+        -all_violators
+Design : vsdcaravel
+Version: T-2022.03-SP5
+Date   : Tue Dec 16 13:55:19 2025
+****************************************
+
+
+   min_delay/hold ('hk_serial_clk' group)
+
+                             Required        Actual
+   Endpoint                 Path Delay     Path Delay        Slack
+   -----------------------------------------------------------------
+   chip_core/gpio_control_in_2[0]/shift_register_reg[1]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[2]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[3]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[4]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[5]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[6]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[7]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[8]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[9]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[10]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[11]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[0]/shift_register_reg[12]/D
+                                7.75           7.28 f        -0.47  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[1]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[2]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[3]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[4]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[5]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[6]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[7]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[8]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[9]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[10]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[11]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_2[1]/shift_register_reg[12]/D
+                                7.53           7.07 f        -0.45  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[1]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[2]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[3]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[4]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[5]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[6]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[7]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[8]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[9]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[10]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[11]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[10]/shift_register_reg[12]/D
+                                7.36           6.92 f        -0.44  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[1]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[2]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[3]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[4]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[5]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[6]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[7]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[8]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[9]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[10]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[11]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[9]/shift_register_reg[12]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[1]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[2]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[3]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[4]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[5]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[6]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[7]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[8]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[9]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[10]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[11]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_2[2]/shift_register_reg[12]/D
+                                7.14           6.71 f        -0.43  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[1]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[2]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[3]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[4]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[5]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[6]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[7]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[8]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[9]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[10]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[11]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[8]/shift_register_reg[12]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[1]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[2]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[3]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[4]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[5]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[6]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[7]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[8]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[9]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[10]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[11]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_2[3]/shift_register_reg[12]/D
+                                6.75           6.35 f        -0.40  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[1]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[2]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[3]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[4]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[5]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[6]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[7]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[8]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[9]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[10]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[11]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[7]/shift_register_reg[12]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[1]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[2]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[3]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[4]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[5]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[6]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[7]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[8]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[9]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[10]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[11]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_2[4]/shift_register_reg[12]/D
+                                6.36           5.99 f        -0.37  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[1]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[2]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[3]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[4]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[5]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[6]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[7]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[8]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[9]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[10]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[11]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[6]/shift_register_reg[12]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[1]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[2]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[3]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[4]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[5]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[6]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[7]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[8]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[9]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[10]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[11]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_2[5]/shift_register_reg[12]/D
+                                5.97           5.63 f        -0.34  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[1]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[2]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[3]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[4]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[5]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[6]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[7]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[8]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[9]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[10]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[11]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[5]/shift_register_reg[12]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[1]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[2]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[3]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[4]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[5]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[6]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[7]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[8]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[9]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[10]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[11]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_2[6]/shift_register_reg[12]/D
+                                5.58           5.27 f        -0.31  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[1]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[2]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[3]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[4]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[5]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[6]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[7]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[8]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[9]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[10]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[11]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[4]/shift_register_reg[12]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[1]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[2]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[3]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[4]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[5]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[6]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[7]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[8]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[9]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[10]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[11]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_2[7]/shift_register_reg[12]/D
+                                5.19           4.90 f        -0.29  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[1]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[2]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[3]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[4]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[5]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[6]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[7]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[8]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[9]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[10]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[11]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[3]/shift_register_reg[12]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[1]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[2]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[3]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[4]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[5]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[6]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[7]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[8]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[9]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[10]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[11]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_2[8]/shift_register_reg[12]/D
+                                4.80           4.54 f        -0.26  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[1]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[2]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[3]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[4]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[5]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[6]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[7]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[8]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[9]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[10]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[11]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[2]/shift_register_reg[12]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[1]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[2]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[3]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[4]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[5]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[6]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[7]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[8]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[9]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[10]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[11]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_2[9]/shift_register_reg[12]/D
+                                4.41           4.18 f        -0.23  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[1]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[2]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[3]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[4]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[5]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[6]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[7]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[8]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[9]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[10]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[11]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[1]/shift_register_reg[12]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[1]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[2]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[3]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[4]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[5]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[6]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[7]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[8]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[9]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[10]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[11]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_2[10]/shift_register_reg[12]/D
+                                4.02           3.82 f        -0.20  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[1]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[2]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[3]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[4]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[5]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[6]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[7]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[8]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[9]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[10]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[11]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1[0]/shift_register_reg[12]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[1]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[2]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[3]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[4]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[5]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[6]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[7]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[8]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[9]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[10]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[11]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_2[11]/shift_register_reg[12]/D
+                                3.63           3.46 f        -0.17  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[1]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[2]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[3]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[4]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[5]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[6]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[7]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[8]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[9]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[10]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[11]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[5]/shift_register_reg[12]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[1]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[2]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[3]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[4]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[5]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[6]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[7]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[8]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[9]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[10]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[11]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_2[12]/shift_register_reg[12]/D
+                                3.24           3.10 f        -0.14  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[1]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[2]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[3]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[4]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[5]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[6]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[7]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[8]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[9]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[10]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[11]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[4]/shift_register_reg[12]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[1]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[2]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[3]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[4]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[5]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[6]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[7]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[8]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[9]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[10]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[11]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_2[13]/shift_register_reg[12]/D
+                                2.85           2.73 f        -0.12  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[1]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[2]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[3]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[4]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[5]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[6]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[7]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[8]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[9]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[10]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[11]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[3]/shift_register_reg[12]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[1]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[2]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[3]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[4]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[5]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[6]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[7]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[8]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[9]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[10]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[11]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_2[14]/shift_register_reg[12]/D
+                                2.46           2.37 f        -0.09  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[1]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[2]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[3]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[4]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[5]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[6]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[7]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[8]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[9]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[10]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[11]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_1a[2]/shift_register_reg[12]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[1]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[2]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[3]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[4]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[5]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[6]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[7]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[8]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[9]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[10]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[11]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_in_2[15]/shift_register_reg[12]/D
+                                2.07           2.01 f        -0.06  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[1]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[2]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[3]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[4]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[5]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[6]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[7]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[8]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[9]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[10]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[11]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[0]/shift_register_reg[12]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[1]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[2]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[3]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[4]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[5]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[6]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[7]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[8]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[9]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[10]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[11]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_in_1a[1]/shift_register_reg[12]/D
+                                1.68           1.65 f        -0.03  (VIOLATED)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[1]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[2]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[3]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[4]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[5]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[6]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[7]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[8]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[9]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[10]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[11]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_bidir_2[1]/shift_register_reg[12]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[1]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[2]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[3]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[4]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[5]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[6]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[7]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[8]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[9]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[10]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[11]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+   chip_core/gpio_control_in_1a[0]/shift_register_reg[12]/D
+                                1.29           1.29 f         0.00  (VIOLATED: increase significant digits)
+
+
+   max_capacitance
+
+                             Required        Actual
+   Net                      Capacitance    Capacitance       Slack
+   -----------------------------------------------------------------
+   chip_core/soc/core/VexRiscv/n314
+                                0.15           0.15           0.00  (VIOLATED: increase significant digits)
+
+   -----------------------------------------------------------------
+   Total                      1                  -0.00  
+
+1

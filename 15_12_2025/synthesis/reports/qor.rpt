@@ -1,0 +1,85 @@
+Warning: Design 'vsdcaravel' has '2' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : qor
+Design : vsdcaravel
+Version: T-2022.03-SP5
+Date   : Tue Dec 16 13:55:19 2025
+****************************************
+
+
+  Timing Path Group 'hk_serial_clk'
+  -----------------------------------
+  Levels of Logic:               0.00
+  Critical Path Length:          0.23
+  Critical Path Slack:          48.05
+  Critical Path Clk Period:    100.00
+  Total Negative Slack:          0.00
+  No. of Violating Paths:        0.00
+  Worst Hold Violation:         -0.47
+  Total Hold Violation:        -99.14
+  No. of Hold Violations:      420.00
+  -----------------------------------
+
+
+  Cell Count
+  -----------------------------------
+  Hierarchical Cell Count:         94
+  Hierarchical Port Count:      12671
+  Leaf Cell Count:              23270
+  Buf/Inv Cell Count:            3305
+  Buf Cell Count:                 501
+  Inv Cell Count:                2809
+  CT Buf/Inv Cell Count:           75
+  Combinational Cell Count:     16860
+  Sequential Cell Count:         6410
+  Macro Count:                      0
+  -----------------------------------
+
+
+  Area
+  -----------------------------------
+  Combinational Area:   300527.359772
+  Noncombinational Area:
+                        405429.248486
+  Buf/Inv Area:          26427.009931
+  Total Buffer Area:          7797.66
+  Total Inverter Area:       18958.65
+  Macro/Black Box Area:    100.320000
+  Net Area:              29122.267508
+  -----------------------------------
+  Cell Area:            706056.928257
+  Design Area:          735179.195766
+
+
+  Design Rules
+  -----------------------------------
+  Total Number of Nets:         25727
+  Nets With Violations:             1
+  Max Trans Violations:             0
+  Max Cap Violations:               1
+  -----------------------------------
+
+
+  Hostname: nanodc.iitgn.ac.in
+
+  Compile CPU Statistics
+  -----------------------------------------
+  Resource Sharing:                   12.64
+  Logic Optimization:                 11.33
+  Mapping Optimization:                5.65
+  -----------------------------------------
+  Overall Compile Time:               40.38
+  Overall Compile Wall Clock Time:    41.22
+
+  --------------------------------------------------------------------
+
+  Design  WNS: 0.00  TNS: 0.00  Number of Violating Paths: 0
+
+
+  Design (Hold)  WNS: 0.47  TNS: 99.14  Number of Violating Paths: 420
+
+  --------------------------------------------------------------------
+
+
+1
