@@ -113,7 +113,7 @@ After reading the synthesized netlist, top-level ports are queried and viewed us
 ```tcl
 gui_show_man_page
 ```
-
+<img width="1614" height="897" alt="Screenshot 2025-12-19 191716" src="https://github.com/user-attachments/assets/b978b905-9a15-4ef3-baa3-a308c488f1a5" />
 
 ```tcl
 get_ports
@@ -123,7 +123,9 @@ This command is used both in the console and within the redirected report sectio
 
 Port placement is performed with:
 
+<img width="1612" height="308" alt="Screenshot 2025-12-19 191923" src="https://github.com/user-attachments/assets/aa530458-8316-4115-9ce6-e4f1275844cd" />
 
+<img width="1619" height="937" alt="Screenshot 2025-12-19 191948" src="https://github.com/user-attachments/assets/a72fb917-9126-4a2d-8d4c-8891ff277c09" />
 
 ```tcl
 place_ports -self
@@ -132,14 +134,16 @@ place_ports -self
 - `place_ports -self` automatically places top-level ports around the die boundary, constrained by the defined floorplan and IO regions.
 - The result shows ports aligned along the four edges, respecting IO region constraints.
 
-> Placeholder for screenshot:  
-> `images/ports_view.png` – Capture showing ports distributed along die boundary after `place_ports -self`.
-
 ***
 
 ## Script details (`scripts/floorplan.tcl`)
 
 The `floorplan.tcl` script automates creation of the floorplan-only design context in ICC2.
+
+```tcl
+
+
+```
 
 ### 1. Basic design and library setup
 
