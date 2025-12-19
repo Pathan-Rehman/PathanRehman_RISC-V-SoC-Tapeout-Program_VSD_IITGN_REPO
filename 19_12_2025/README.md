@@ -19,7 +19,6 @@ Key goals:
 
 - `scripts/floorplan.tcl`: Main ICC2 TCL script that creates the design library and floorplan.
 - `reports/floorplan_report.txt`: Text report capturing die/core geometry and top-level ports.
-- `images/floorplan_screenshot.png`: Floorplan GUI snapshot showing die, core, and IO regions. 
 
 <img width="1604" height="1017" alt="image" src="https://github.com/user-attachments/assets/5f3a5117-20b9-464a-8885-e72a97cd1e15" />
 
