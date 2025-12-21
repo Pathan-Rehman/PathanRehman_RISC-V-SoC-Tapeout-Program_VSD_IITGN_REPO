@@ -153,7 +153,7 @@ source -echo ./icc2_dp_setup.tcl
 
 <details>
   <summary>icc2_common_setup.tcl</summary>
-
+```
 puts "RM-info : Running script [info script]\n"
 
 ##########################################################################################
@@ -303,14 +303,14 @@ set RELEASE_DIR_PNR		"" 	;# Specify the release directory of PNR RM;
 set REDHAWK_SEARCH_PATH		"" 	;# Required. Search path to the NDM, reference libraries, and etc.
 
 puts "RM-info : Completed script [info script]\n"
-
+```
 
 </details>
 
 
 <details>
   <summary>icc2_dp_setup.tcl</summary>
-
+```
 puts "RM-info : Running script [info script]\n"
 ##########################################################################################
 # Tool: IC Compiler II 
@@ -590,7 +590,7 @@ set search_path "/home/prakhan/task_5/icc2_workshop_collaterals/"
 set_app_var link_library "nangate_typical.db sram_32_1024_freepdk45_TT_1p0V_25C_lib.db"
 
 puts "RM-info : Completed script [info script]\n"
-
+```
 </details>
 
 
