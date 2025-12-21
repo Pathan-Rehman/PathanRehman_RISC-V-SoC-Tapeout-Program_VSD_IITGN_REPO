@@ -827,18 +827,20 @@ write_def fp_raven.def
 <details>
   <summary>Report</summary>
 
+```
 ===== FLOORPLAN GEOMETRY (USER DEFINED) =====
 Die Area  : 0 0 3588 5188  (microns)
 Core Area : 200 200 3388 4988  (microns)
 
 ===== TOP LEVEL PORTS =====
 {vddio vddio_2 vssio vssio_2 vdda vssa vccd vssd vdda1 vdda1_2 vdda2 vssa1 vssa1_2 vssa2 vccd1 vccd2 vssd1 vssd2 gpio {mprj_io[37]} {mprj_io[36]} {mprj_io[35]} {mprj_io[34]} {mprj_io[33]} {mprj_io[32]} {mprj_io[31]} {mprj_io[30]} {mprj_io[29]} {mprj_io[28]} {mprj_io[27]} {mprj_io[26]} {mprj_io[25]} {mprj_io[24]} {mprj_io[23]} {mprj_io[22]} {mprj_io[21]} {mprj_io[20]} {mprj_io[19]} {mprj_io[18]} {mprj_io[17]} {mprj_io[16]} {mprj_io[15]} {mprj_io[14]} {mprj_io[13]} {mprj_io[12]} {mprj_io[11]} {mprj_io[10]} {mprj_io[9]} {mprj_io[8]} {mprj_io[7]} {mprj_io[6]} {mprj_io[5]} {mprj_io[4]} {mprj_io[3]} {mprj_io[2]} {mprj_io[1]} {mprj_io[0]} clock resetb flash_csb flash_clk flash_io0 flash_io1}
-
+```
 </details>
 
 <details>
   <summary>Log</summary>
-
+	
+```
 [SCL] 12/21/2025 12:57:48 PID:12598 Client:nanodc.iitgn.ac.in Authorization failed Synopsys 2022.12
 [SCL] 12/21/2025 12:57:49 PID:12598 Client:nanodc.iitgn.ac.in Authorization failed Synopsys-Release 2022.12
 [SCL] 12/21/2025 12:57:49 PID:12598 Client:nanodc.iitgn.ac.in Authorization failed Galaxy-Internal-Debug 2022.12
@@ -1721,7 +1723,7 @@ Information: Ending 'place_pins' (FLW-8001)
 Information: Time: 2025-12-21 13:01:24 / Session: 0.06 hr / Command: 0.00 hr / Memory: 598 MB (FLW-8100)
 1
 icc2_shell> 
-
+```
 </details>
 
 
