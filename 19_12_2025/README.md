@@ -156,8 +156,8 @@ source -echo ./icc2_dp_setup.tcl
 
 	```puts "RM-info : Running script [info script]\n"
 
-##########################################################################################
-# Tool: IC Compiler II
+		##########################################################################################
+		# Tool: IC Compiler II
 # Script: icc2_common_setup.tcl
 # Version: P-2019.03-SP4
 # Copyright (C) 2014-2019 Synopsys, Inc. All rights reserved.
