@@ -152,12 +152,13 @@ source -echo ./icc2_dp_setup.tcl
 ```
 
 <details>
-  <summary>icc2_common_setup.tcl</summary>
+<summary>icc2_common_setup.tcl</summary>
 
-	```puts "RM-info : Running script [info script]\n"
+```tcl
+puts "RM-info : Running script [info script]\n"
 
-		##########################################################################################
-		# Tool: IC Compiler II
+##########################################################################################
+# Tool: IC Compiler II
 # Script: icc2_common_setup.tcl
 # Version: P-2019.03-SP4
 # Copyright (C) 2014-2019 Synopsys, Inc. All rights reserved.
@@ -303,8 +304,8 @@ set RELEASE_DIR_PNR		"" 	;# Specify the release directory of PNR RM;
 set REDHAWK_SEARCH_PATH		"" 	;# Required. Search path to the NDM, reference libraries, and etc.
 
 puts "RM-info : Completed script [info script]\n"
-```
 
+```
 </details>
 
 
