@@ -3827,7 +3827,8 @@ icc2_shell>
 ### Timing Reports
 
 > **📋 Critical Path Report:**
-> ```
+
+```
 Information: The RC mode used is DR for design 'raven_wrapper'. (NEX-022)
 Extracting design: raven_wrapper 
 Information: coupling capacitance is lumped to ground. (NEX-030)
