@@ -3690,7 +3690,9 @@ save_lib -all
 ### Design Statistics
 
 > **📋 Final Statistics Log:**
-> ```
+
+```
+
 icc2_shell> report_design
 ****************************************
 Report : design
@@ -3765,8 +3767,9 @@ Total wire length                    : 27725416.81 micron
 Total number of wires                : 926287
 Total number of contacts             : 2954444
 1
-icc2_shell> 
-> ```
+icc2_shell>
+
+```
 
 
 
