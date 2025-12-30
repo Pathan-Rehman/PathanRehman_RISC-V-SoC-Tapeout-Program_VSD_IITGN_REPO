@@ -292,15 +292,296 @@ set MIN_ROUTING_LAYER "metal1"
 set MAX_ROUTING_LAYER "metal10"
 ```
 
-> **📸 Screenshot Placeholder:**
-> ![Common Setup Configuration](./images/01_common_setup_config.png)
-> *Figure 1: Common setup script variables and paths*
-
 ---
 
 ### 2. Design Planning Setup (`icc2_dp_setup.tcl`)
 
 This script configures design planning specific options.
+
+<details>
+  <summary>icc2_dp_setup.tcl</summary>
+```
+puts "RM-info : Running script [info script]\n"
+##########################################################################################
+# Tool: IC Compiler II 
+# Script: icc2_dp_setup.tcl 
+# Version: P-2019.03-SP4
+# Copyright (C) 2014-2019 Synopsys, Inc. All rights reserved.
+##########################################################################################
+
+##########################################################################################
+# 				Flow Setup
+##########################################################################################
+set DP_FLOW         "flat"    ;# hier or flat
+set FLOORPLAN_STYLE "channel" ;# Supported design styles channel, abutted
+set CHECK_DESIGN    "true"    ;# run atomic check_design pre checks prior to DP commands
+
+set DISTRIBUTED 0  ;# Use distributed runs
+### It is required to include the set_host_options command to enable distributed mode tasks. For example,
+set_host_options -max_cores 8
+#set_host_options -name block_script -submit_command [list qsub -P bnormal -l mem_free=6G,qsc=o -cwd]
+
+set BLOCK_DIST_JOB_FILE             ""     ;# File to set block specific resource requests for distributed jobs
+# For example:
+#   set_host_options -name block_script  -submit_command "bsub -q normal"
+#   set_host_options -name large_block   -submit_command "bsub -q huge"
+#   set_host_options -name special_block -submit_command "rsh" local_machine
+#   set_app_options -block [get_block block4] -list {plan.distributed_run.block_host large_block}
+#   set_app_options -block [get_block block5] -list {plan.distributed_run.block_host large_block}
+#   set_app_options -block [get_block block2] -list {plan.distributed_run.block_host special_block}
+#  
+#   All the jobs associated with blocks that do not have the plan.distributed_run.block_host app option specified
+#   will run using the block_script host option. The jobs for blocks block4 and block5 will use the large_block 
+#   host option. The job form  block2  will  use  the  special_block host option.
+
+
+##########################################################################################
+# If the design is run with MIBs then change the block list appropriately
+##########################################################################################
+set DP_BLOCK_REFS                     [list] ;# design names for each physical block (including black boxes) in the design;
+                                             ;# this includes bottom and mid level blocks in a Multiple Physical Hierarchy (MPH) design
+set DP_INTERMEDIATE_LEVEL_BLOCK_REFS  [list data_memory] ;# design reference names for mid level blocks only
+set DP_BB_BLOCK_REFS                  [list] ;# Black Box reference names 
+set BOTTOM_BLOCK_VIEW             "abstract" ;# Support abstract or design view for bottom blocks
+                                             ;# in the hier flow
+set INTERMEDIATE_BLOCK_VIEW       "abstract" ;# Support abstract or design view for intermediate blocks
+
+if { [info exists INTERMEDIATE_BLOCK_VIEW] && $INTERMEDIATE_BLOCK_VIEW == "abstract" } {
+   set_app_options -name abstract.allow_all_level_abstract -value true  ;# Dafult value is false
+}
+
+# Provide blackbox instanace: target area, BB UPF file, BB Timing file, boundary
+#set DP_BB_BLOCK_REFS "leon3s_bb"
+#set DP_BB_BLOCKS(leon3s_bb,area)        [list 1346051] ;
+#set DP_BB_BLOCKS(leon3s_bb,upf)         [list ${des_dir}/leon3s_bb.upf] ;
+#set DP_BB_BLOCKS(leon3s_bb,timing)      [list ${des_dir}/leon3s_bbt.tcl] ;
+#set DP_BB_BLOCKS(leon3s_bb,boundary)    { {x1 y1} {x2 y1} {x2 y2} {x1 y2} {x1 y1} } ;
+#set DP_BB_SPLIT    "true"
+
+
+##########################################################################################
+# 				CONSTRAINTS / UPF INTENT
+##########################################################################################
+set TCL_TIMING_RULER_SETUP_FILE       "" ;# file sourced to define parasitic constraints for use with timing ruler 
+                                          # before full extraction environment is defined
+                                          # Example setup file:
+                                          #       set_parasitic_parameters \
+                                          #         -early_spec para_WORST \
+                                          #         -late_spec para_WORST
+set CONSTRAINT_MAPPING_FILE           "" ;# Constraint Mapping File. Default is "split/mapfile"
+set TCL_UPF_FILE                      "" ;# Optional power intent TCL script
+
+
+##########################################################################################
+# 				TOP LEVEL FLOORPLAN CREATION (die, pad, RDL) / PLACE IO
+##########################################################################################
+set TCL_PHYSICAL_CONSTRAINTS_FILE     "" ;# TCL script for primary die area creation. If specified, DEF_FLOORPLAN_FILES will be loaded after TCL_PHYSICAL_CONSTRAINTS_FILE
+set TCL_PRE_COMMIT_FILE               "" ;# file sourced to set attributes, lib cell purposes, .. etc on specific cells, prior to running commit_block
+set TCL_USER_INIT_DP_POST_SCRIPT      "" ;# An optional Tcl file to be sourced at the very end of init_dp.tcl before save_block.
+
+
+##########################################################################################
+# 				PRE_SHAPING
+##########################################################################################
+set TCL_USER_PRE_SHAPING_PRE_SCRIPT   "" ;# An optional Tcl file to be sourced at the very beginning of the task
+set TCL_USER_PRE_SHAPING_POST_SCRIPT  "" ;# An optional Tcl file to be sourced at the very end of the task
+
+##########################################################################################
+# 				PLACE_IO
+##########################################################################################
+set TCL_PAD_CONSTRAINTS_FILE          "/home/prakhan/task_6/icc2_workshop_collaterals/standaloneFlow/pad_placement_constraints.tcl" ;# file sourced to create everything needed by place_io to complete IO placement
+                                         ;# including flip chip bumps, and io constraints
+set TCL_RDL_FILE                      "" ;# file sourced to create RDL routes
+set TCL_USER_PLACE_IO_PRE_SCRIPT      "" ;# An optional Tcl file to be sourced at the very beginning of the task
+set TCL_USER_PLACE_IO_POST_SCRIPT     "" ;# An optional Tcl file to be sourced at the very end of the task
+
+
+##########################################################################################
+# 				SHAPING
+##########################################################################################
+switch $FLOORPLAN_STYLE {
+   channel {set SHAPING_CMD_OPTIONS           "-channels true"} 
+   abutted {set SHAPING_CMD_OPTIONS           "-channels false"} 
+}
+
+set TCL_SHAPING_CONSTRAINTS_FILE      "" ;# Specify any constraints prior to shaping i.e. set_shaping_options
+                                          # or specify some block shapes manually, for example:
+                                          #    set_block_boundary -cell block1 -boundary {{2.10 2.16} {2.10 273.60} \
+                                          #    {262.02 273.60} {262.02 2.16}} -orientation R0
+                                          #    set_fixed_objects [get_cells block1]
+                                          # Support TCL based shaping constraints
+                                          # An example is in rm_icc2_dp_scripts/tcl_shaping_constraints_example.tcl
+set SHAPING_CONSTRAINTS_FILE          "" ;# Will be included as the -constraint_file option for shape_blocks
+set TCL_SHAPING_PNS_STRATEGY_FILE     "" ;# file sourced to create PG strategies for block grid creation
+set TCL_MANUAL_SHAPING_FILE           "" ;# File sourced to re-create all block shapes.
+                                          # If this file exists, automatic shaping will be by-passed.
+                                          # Existing auto or manual block shapes can be written out using the following:
+                                          #    write_floorplan -objects <BLOCK_INSTS>
+set TCL_USER_SHAPING_PRE_SCRIPT       "" ;# An optional Tcl file to be sourced at the very beginning of the task
+set TCL_USER_SHAPING_POST_SCRIPT      "" ;# An optional Tcl file to be sourced at the very end of the task
+
+
+##########################################################################################
+# 				PLACEMENT
+##########################################################################################
+set TCL_PLACEMENT_CONSTRAINTS_FILE    "" ;# Placeholder for any macro or standard cell placement constraints & options.
+                                          # File is sourced prior to DP placement
+set PLACEMENT_PIN_CONSTRAINT_AWARE    "false" ;# tells create_placement to consider pin constraints during placement
+set USE_INCREMENTAL_DATA              "0" ;# Use floorplan constraints that were written out on a previous run
+set CONGESTION_DRIVEN_PLACEMENT       "" ;# Set to one of the following: std_cell, macro, or both to enable congestion driven placement
+set TIMING_DRIVEN_PLACEMENT           "" ;# Set to one of the following: std_cell, macro, or both to enable timing driven placement
+set TCL_USER_PLACEMENT_PRE_SCRIPT     "" ;# An optional Tcl file to be sourced at the very beginning of the task
+set TCL_USER_PLACEMENT_POST_SCRIPT    "" ;# An optional Tcl file to be sourced at the very end of the task
+
+
+##########################################################################################
+#				GLOBAL PLANNING
+##########################################################################################
+set TCL_GLOBAL_PLANNING_FILE          "" ;#Global planning for bus/critical nets
+
+
+##########################################################################################
+# 				PNS
+##########################################################################################
+set TCL_PNS_FILE                      "./pns_example.tcl" ;# File sourced to define all power structures. 
+                                          # This file will include the following types of PG commands:
+                                          #   PG Regions
+                                          #   PG Patterns
+                                          #   PG Strategies
+                                          # Note: The file should not contain compile_pg statements
+                                          # An example is in rm_icc2_dp_scripts/pns_example.tcl
+set PNS_CHARACTERIZE_FLOW             "true"  ;# Perform PG characterization and implementation
+set TCL_COMPILE_PG_FILE               "./compile_pg_example.tcl" ;# File should contain all the compile_pg_* commands to create the power networks 
+                                          # specified in the strategies in the TCL_PNS_FILE. 
+                                          # An example is in rm_icc2_dp_scripts/compile_pg_example.tcl
+set TCL_PG_PUSHDOWN_FILE              "" ;# Create this file to facilitate manual pushdown and bypass auto pushdown in the flow.
+set TCL_POST_PNS_FILE                 "" ;# If it exists, this file will be sourced after PG creation.
+set TCL_USER_CREATE_POWER_PRE_SCRIPT  "" ;# An optional Tcl file to be sourced at the very beginning of the task
+set TCL_USER_CREATE_POWER_POST_SCRIPT "" ;# An optional Tcl file to be sourced at the very end of the task
+
+
+##########################################################################################
+# 				PLACE PINS
+##########################################################################################
+##Note:Feedthroughs are disabled by default. Enable feedthroughs either through set_*_pin_constraints  Tcl commands or through Pin constraints file
+set TCL_PIN_CONSTRAINT_FILE           "" ;# file sourced to apply set_*_pin_constraints to the design
+set CUSTOM_PIN_CONSTRAINT_FILE        "" ;# will be loaded via read_pin_constraints -file
+                                         ;# used for more complex pin constraints, 
+                                         ;# or in constraint replay
+set PLACE_PINS_SELF                   "true" ;# Set to true if the block's top level pins are not all connected to IO drivers.
+set TIMING_PIN_PLACEMENT              "true" ;# Set to true for timing driven pin placement
+set TCL_USER_PLACE_PINS_PRE_SCRIPT    "" ;# An optional Tcl file to be sourced at the very beginning of the task
+set TCL_USER_PLACE_PINS_POST_SCRIPT   "" ;# An optional Tcl file to be sourced at the very end of the task
+
+
+##########################################################################################
+# 				PRE-TIMING
+##########################################################################################
+set TCL_USER_PRE_TIMING_PRE_SCRIPT    "" ;# An optional Tcl file to be sourced at the very beginning of the task
+set TCL_USER_PRE_TIMING_POST_SCRIPT   "" ;# An optional Tcl file to be sourced at the very end of the task
+
+
+##########################################################################################
+# 				TIMING ESTIMATION
+##########################################################################################
+set TCL_TIMING_ESTIMATION_SETUP_FILE       "" ;# Specify any constraints prior to timing estimation
+set TCL_USER_TIMING_ESTIMATION_PRE_SCRIPT  "" ;# An optional Tcl file to be sourced at the very beginning of the task
+set TCL_USER_TIMING_ESTIMATION_POST_SCRIPT "" ;# An optional Tcl file to be sourced at the very end of the task
+set TCL_LIB_CELL_DONT_USE_FILE             "" ;# A Tcl file for customized don't use ("set_lib_cell_purpose -exclude <purpose>" commands);
+                                              ;#  to prevent estimate_timing picking a lib_cell not used by pnr flow.
+                                              ;#  please specify non-optimization purpose lib cells in the file. 
+
+
+##########################################################################################
+# 				BUDGETING
+##########################################################################################
+set TCL_BUDGETING_SETUP_FILE                "" ;# Specify any constraints prior to budgeting
+set TCL_BOUNDARY_BUDGETING_CONSTRAINTS_FILE "" ;# An optional user constraints file to override compute_budget_constraints
+set TCL_USER_BUDGETING_PRE_SCRIPT           "" ;# An optional Tcl file to be sourced at the very beginning of the task
+set TCL_USER_BUDGETING_POST_SCRIPT          "" ;# An optional Tcl file to be sourced at the very end of the task
+
+
+##########################################################################################
+## System Variables (there's no need to change the following)
+##########################################################################################
+set WORK_DIR ./work
+set WORK_DIR_WRITE_DATA ./write_data_dir
+if !{[file exists $WORK_DIR]} {file mkdir $WORK_DIR}
+
+set SPLIT_CONSTRAINTS_LABEL_NAME split_constraints
+set INIT_DP_LABEL_NAME init_dp
+set PRE_SHAPING_LABEL_NAME pre_shaping
+set PLACE_IO_LABEL_NAME place_io
+set SHAPING_LABEL_NAME shaping
+set PLACEMENT_LABEL_NAME placement
+set CREATE_POWER_LABEL_NAME create_power
+set CLOCK_TRUNK_PLANNING_LABEL_NAME clock_trunk_planning
+set PLACE_PINS_LABEL_NAME place_pins
+set PRE_TIMING_LABEL_NAME pre_timing
+set TIMING_ESTIMATION_LABEL_NAME timing_estimation
+set BUDGETING_LABEL_NAME budgeting
+
+# Block label to be release by write_data
+if {$DP_FLOW == "flat"} {
+   set WRITE_DATA_LABEL_NAME timing_estimation
+} else {
+   set WRITE_DATA_LABEL_NAME budgeting
+}
+
+## Directories
+set OUTPUTS_DIR	"./outputs_icc2"	;# Directory to write output data files; mainly used by write_data.tcl
+set REPORTS_DIR	"./rpts_icc2"		;# Directory to write reports; mainly used by report_qor.tcl
+
+set REPORTS_DIR_SPLIT_CONSTRAINTS $REPORTS_DIR/$SPLIT_CONSTRAINTS_LABEL_NAME
+set REPORTS_DIR_INIT_DP $REPORTS_DIR/$INIT_DP_LABEL_NAME
+set REPORTS_DIR_PRE_SHAPING $REPORTS_DIR/$PRE_SHAPING_LABEL_NAME
+set REPORTS_DIR_PLACE_IO $REPORTS_DIR/$PLACE_IO_LABEL_NAME
+set REPORTS_DIR_SHAPING $REPORTS_DIR/$SHAPING_LABEL_NAME
+set REPORTS_DIR_PLACEMENT $REPORTS_DIR/$PLACEMENT_LABEL_NAME
+set REPORTS_DIR_CREATE_POWER $REPORTS_DIR/$CREATE_POWER_LABEL_NAME
+set REPORTS_DIR_CLOCK_TRUNK_PLANNING $REPORTS_DIR/$CLOCK_TRUNK_PLANNING_LABEL_NAME
+set REPORTS_DIR_PLACE_PINS $REPORTS_DIR/$PLACE_PINS_LABEL_NAME
+set REPORTS_DIR_PRE_TIMING $REPORTS_DIR/$PRE_TIMING_LABEL_NAME
+set REPORTS_DIR_TIMING_ESTIMATION $REPORTS_DIR/$TIMING_ESTIMATION_LABEL_NAME
+set REPORTS_DIR_BUDGETING $REPORTS_DIR/$BUDGETING_LABEL_NAME
+
+if !{[file exists $REPORTS_DIR]} {file mkdir $REPORTS_DIR}
+if !{[file exists $OUTPUTS_DIR]} {file mkdir $OUTPUTS_DIR}
+if !{[file exists $REPORTS_DIR_SPLIT_CONSTRAINTS]} {file mkdir $REPORTS_DIR_SPLIT_CONSTRAINTS}
+if !{[file exists $REPORTS_DIR_INIT_DP]} {file mkdir $REPORTS_DIR_INIT_DP}
+if !{[file exists $REPORTS_DIR_PRE_SHAPING]} {file mkdir $REPORTS_DIR_PRE_SHAPING}
+if !{[file exists $REPORTS_DIR_PLACE_IO]} {file mkdir $REPORTS_DIR_PLACE_IO}
+if !{[file exists $REPORTS_DIR_SHAPING]} {file mkdir $REPORTS_DIR_SHAPING}
+if !{[file exists $REPORTS_DIR_PLACEMENT]} {file mkdir $REPORTS_DIR_PLACEMENT}
+if !{[file exists $REPORTS_DIR_CREATE_POWER]} {file mkdir $REPORTS_DIR_CREATE_POWER}
+if !{[file exists $REPORTS_DIR_CLOCK_TRUNK_PLANNING]} {file mkdir $REPORTS_DIR_CLOCK_TRUNK_PLANNING}
+if !{[file exists $REPORTS_DIR_PLACE_PINS]} {file mkdir $REPORTS_DIR_PLACE_PINS}
+if !{[file exists $REPORTS_DIR_PRE_TIMING]} {file mkdir $REPORTS_DIR_PRE_TIMING}
+if !{[file exists $REPORTS_DIR_TIMING_ESTIMATION]} {file mkdir $REPORTS_DIR_TIMING_ESTIMATION}
+if !{[file exists $REPORTS_DIR_BUDGETING]} {file mkdir $REPORTS_DIR_BUDGETING}
+
+
+if {[info exists env(LOGS_DIR)]} {
+   set log_dir $env(LOGS_DIR)
+} else {
+   set log_dir ./logs_icc2 
+}
+
+set search_path [list ./rm_icc2_dp_scripts ./rm_icc2_pnr_scripts $WORK_DIR ] 
+lappend search_path .
+
+##########################################################################################
+# 				Optional Settings
+##########################################################################################
+set_message_info -id PVT-012 -limit 1
+set_message_info -id PVT-013 -limit 1
+set search_path "/home/prakhan/task_6/icc2_workshop_collaterals/"
+set_app_var link_library "nangate_typical.db sram_32_1024_freepdk45_TT_1p0V_25C_lib.db"
+
+puts "RM-info : Completed script [info script]\n"
+```
+</details>
+
 
 #### Flow Configuration:
 ```tcl
@@ -319,19 +600,27 @@ set PLACE_PINS_SELF "true"
 set TIMING_PIN_PLACEMENT "true"
 ```
 
-> **📋 Log Placeholder:**
-> ```
-> [DP_SETUP_LOG_START]
-> RM-info : Design flow set to 'flat'
-> RM-info : Floorplan style: channel
-> RM-info : Check design enabled
-> RM-info : Max cores set to 8
-> [DP_SETUP_LOG_END]
-> ```
-
 ---
 
 ### 3. Clock and IO Constraints
+
+<details>
+  <summary>raven_wrapper.sdc</summary>
+
+```
+# Task 6: 100 MHz Clock Constraints (10ns period)
+create_clock -name ext_clk -period 10.0 -waveform {0.0 5.0} [get_ports ext_clk]
+create_clock -name pll_clk -period 10.0 -waveform {0.0 5.0} [get_ports pll_clk]
+create_clock -name spi_sck -period 10.0 -waveform {0.0 5.0} [get_ports spi_sck]
+
+set_input_transition -min 0.1 [all_inputs]
+set_input_transition -max 0.5 [all_inputs]
+set_input_delay -min -clock ext_clk 0.2 [all_inputs]
+set_input_delay -max -clock ext_clk 0.6 [all_inputs]
+```
+
+</details>
+
 
 #### Clock Creation:
 ```tcl
@@ -351,23 +640,71 @@ set_input_delay -max -clock ext_clk 0.6 [all_inputs]
 **Purpose:** Sets realistic input transition times and delays relative to the external clock
 
 #### IO Pad Placement Guides:
-```tcl
-# Right side pads
-create_io_guide -side right -pad_cells {analog_out_sel_buf bg_ena_buf ...} \
-    -line {{3588 5188} 5188}
-
-# Left side pads  
-create_io_guide -side left -pad_cells {flash_io_buf_0 flash_io_buf_1 ...} \
-    -line {{0 0} 5188}
-
-# Top side pads
-create_io_guide -side top -pad_cells {gpio2 gpio3 ...} \
-    -line {{0 5188} 3588}
-
-# Bottom side pads
-create_io_guide -side bottom -pad_cells {overtemp_buf pll_clk_buf ...} \
-    -line {{3588 0} 3588}
+<details>
+  <summary>pad_placement_constraints.tcl</summary>
+	
 ```
+set_attribute -objects [get_cells analog_out_sel_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells bg_ena_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells comp_ena_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells comp_in_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells comp_ninputsrc_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells comp_pinputsrc_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells ext_clk_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells ext_clk_sel_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells ext_reset_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells flash_clk_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells flash_csb_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells flash_io_buf_0 ] -name physical_status -value placed
+set_attribute -objects [get_cells flash_io_buf_1 ] -name physical_status -value placed
+set_attribute -objects [get_cells flash_io_buf_2 ] -name physical_status -value placed
+set_attribute -objects [get_cells flash_io_buf_3 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio0 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio1 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio10 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio11 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio12 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio13 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio14 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio15 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio2 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio3 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio4 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio5 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio6 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio7 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio8 ] -name physical_status -value placed
+set_attribute -objects [get_cells gpio9 ] -name physical_status -value placed
+set_attribute -objects [get_cells irq_pin_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells opamp_bias_ena_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells opamp_ena_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells overtemp_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells overtemp_ena_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells pll_clk_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells rcosc_ena_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells rcosc_in_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells reset_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells ser_rx_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells ser_tx_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells spi_sck_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells trap_buf ] -name physical_status -value placed
+set_attribute -objects [get_cells xtal_in_buf ] -name physical_status -value placed
+
+#sram #added new
+#set_attribute [get_cells sram] origin {2713.5550 750.3550}  
+#set_attribute [get_cells sram] status fixed
+
+create_io_guide -side right -pad_cells {analog_out_sel_buf bg_ena_buf comp_ena_buf comp_in_buf comp_ninputsrc_buf comp_pinputsrc_buf ext_clk_buf ext_clk_sel_buf ext_reset_buf flash_clk_buf flash_csb_buf} -line {{3588 5188} 5188}
+
+
+create_io_guide -side left -pad_cells {flash_io_buf_0 flash_io_buf_1 flash_io_buf_2 flash_io_buf_3 gpio0 gpio1 gpio10 gpio11 gpio12 gpio13 gpio14} -line {{0 0} 5188}
+create_io_guide -side top -pad_cells {gpio2 gpio3 gpio4 gpio5 gpio6 gpio7 gpio8 gpio9 irq_pin_buf} -line {{0 5188} 3588}
+create_io_guide -side bottom -pad_cells {overtemp_buf overtemp_ena_buf pll_clk_buf rcosc_ena_buf rcosc_in_buf reset_buf ser_rx_buf ser_tx_buf spi_sck_buf trap_buf} -line {{3588 0} 3588}
+
+```
+
+</details>
+
 **Purpose:** Distributes IO pads along all four sides of the die for optimal signal routing
 
 ---
@@ -376,6 +713,256 @@ create_io_guide -side bottom -pad_cells {overtemp_buf pll_clk_buf ...} \
 
 ### Script Overview
 The floorplanning script performs die/core definition, IO pad placement, macro placement, and blockage creation.
+
+<details>
+  <summary>floorplan.tcl</summary>
+
+```
+################################################################################
+# SYNOPSYS ICC2 FLOORPLAN SCRIPT
+################################################################################
+
+################################################################################
+# COMMON SETUP
+################################################################################
+source -echo ./icc2_common_setup.tcl
+source -echo ./icc2_dp_setup.tcl
+
+
+################################################################################
+# OPEN / CREATE LIBRARY
+################################################################################
+if {![file exists ${WORK_DIR}/${DESIGN_LIBRARY}]} {
+   puts "RM-info : Creating library $DESIGN_LIBRARY"
+   create_lib ${WORK_DIR}/${DESIGN_LIBRARY} \
+      -ref_libs $REFERENCE_LIBRARY \
+      -tech $TECH_FILE
+} else {
+   puts "RM-info : Opening existing library $DESIGN_LIBRARY"
+}
+
+open_lib ${WORK_DIR}/${DESIGN_LIBRARY}
+
+
+################################################################################
+# READ NETLIST
+################################################################################
+puts "RM-info : Reading netlist"
+
+read_verilog \
+   -design ${DESIGN_NAME}/${INIT_DP_LABEL_NAME} \
+   -top ${DESIGN_NAME} \
+   ${VERILOG_NETLIST_FILES}
+
+
+################################################################################
+# TECH + TLU+
+################################################################################
+if {[file exists [which $TCL_TECH_SETUP_FILE]]} {
+   source -echo $TCL_TECH_SETUP_FILE
+}
+
+if {[file exists [which $TCL_PARASITIC_SETUP_FILE]]} {
+   source -echo $TCL_PARASITIC_SETUP_FILE
+}
+
+
+################################################################################
+# FLOORPLAN
+################################################################################
+puts "RM-info : Initializing floorplan"
+
+initialize_floorplan \
+   -control_type die \
+   -boundary {{0 0} {3588 5188}} \
+   -core_offset {300 300 300 300}
+
+save_block -force -label floorplan
+
+
+################################################################################
+# POWER NET CONNECTION (EARLY)
+################################################################################
+connect_pg_net -automatic -all_blocks
+save_block -force -label pre_shape
+
+
+################################################################################
+# IO PAD PLACEMENT
+################################################################################
+if {[file exists [which $TCL_PAD_CONSTRAINTS_FILE]]} {
+   source -echo $TCL_PAD_CONSTRAINTS_FILE
+   place_io
+}
+
+# Fix IO locations
+set_attribute \
+   [get_cells -hier -filter "pad_cell==true"] \
+   status fixed
+
+
+################################################################################
+# PAD KEEP-OUTS (HARD)
+################################################################################
+puts "RM-info : Creating hard keepout around IO pads"
+
+create_keepout_margin \
+   -type hard \
+   -outer {8 8 8 8} \
+   [get_cells -hier -filter "pad_cell==true"]
+
+
+################################################################################
+# HARD PLACEMENT BLOCKAGES AROUND CORE EDGE
+################################################################################
+puts "RM-info : Creating hard placement blockages around core boundary"
+
+# Core boundary = {{300 300} {3288 4888}}
+# Creating 20um hard blockage band inside core edge
+
+create_placement_blockage -type hard \
+   -boundary {{300 300} {3288 320}} \
+   -name core_hard_blockage_bottom
+
+create_placement_blockage -type hard \
+   -boundary {{300 4868} {3288 4888}} \
+   -name core_hard_blockage_top
+
+create_placement_blockage -type hard \
+   -boundary {{300 320} {320 4868}} \
+   -name core_hard_blockage_left
+
+create_placement_blockage -type hard \
+   -boundary {{3268 320} {3288 4868}} \
+   -name core_hard_blockage_right
+
+
+################################################################################
+# SRAM MACRO PLACEMENT
+################################################################################
+puts "RM-info : Placing SRAM macro"
+
+set sram [get_cells -quiet sram]
+
+if {[sizeof_collection $sram] > 0} {
+
+   set_attribute $sram origin {365.4500 4544.9250}
+   set_attribute $sram orientation MXR90
+   set_attribute $sram status placed
+}
+
+
+################################################################################
+# MACRO HALOS WITH ASYMMETRIC SPACING
+################################################################################
+set macros [get_cells -hier -filter "is_hard_macro==true"]
+
+if {[sizeof_collection $macros] > 0} {
+
+   puts "RM-info : Creating asymmetric halos around macros"
+
+   # Create minimum halo (2um) on top, bottom, right
+   # No halo on left side (will be blocked separately)
+   create_keepout_margin \
+      -type hard \
+      -outer {0 2 2 2} \
+      $macros
+}
+
+
+################################################################################
+# HARD BLOCKAGE ON LEFT SIDE OF MACRO TO CORE EDGE
+################################################################################
+puts "RM-info : Creating hard blockage from macro left side to core edge"
+
+if {[sizeof_collection $sram] > 0} {
+   
+   # Create hard blockage with specified coordinates
+   create_placement_blockage -type hard \
+      -boundary {{320.0000 4522.9250} {594.5300 4802.9150}} \
+      -name macro_left_side_blockage
+   
+   puts "RM-info : Hard blockage created from (320.0000, 4522.9250) to (594.5300, 4802.9150)"
+}
+
+
+################################################################################
+# MCMM CONSTRAINTS
+################################################################################
+if {[file exists $TCL_MCMM_SETUP_FILE]} {
+   source -echo $TCL_MCMM_SETUP_FILE
+}
+
+
+################################################################################
+# PLACEMENT CONFIG
+################################################################################
+set plan.place.auto_generate_blockages true
+set_app_options -name place_opt.flow.do_spg -value true
+set_app_options -name route.global.timing_driven -value true
+
+
+################################################################################
+# GLOBAL DENSITY CONTROL
+################################################################################
+set_attribute [current_design] place_global_density 0.65
+
+
+################################################################################
+# FIX MACROS
+################################################################################
+if {[sizeof_collection $macros] > 0} {
+   set_attribute $macros status fixed
+}
+
+
+################################################################################
+# PIN PLACEMENT
+################################################################################
+if {[file exists [which $TCL_PIN_CONSTRAINT_FILE]] && !$PLACEMENT_PIN_CONSTRAINT_AWARE} {
+   source -echo $TCL_PIN_CONSTRAINT_FILE
+}
+
+set_app_options -as_user_default -list {route.global.timing_driven true}
+
+if {$CHECK_DESIGN} {
+   redirect -file ${REPORTS_DIR_PLACE_PINS}/check_design.pre_pin_placement {check_design -ems_database check_design.pre_pin_placement.ems -checks dp_pre_pin_placement}
+}
+
+if {$PLACE_PINS_SELF} {
+   place_pins -self
+}
+
+if {$PLACE_PINS_SELF} {
+   # Write top-level port constraint file based on actual port locations
+   write_pin_constraints -self \
+      -file_name $OUTPUTS_DIR/preferred_port_locations.tcl \
+      -physical_pin_constraint {side | offset | layer} \
+      -from_existing_pins
+
+   # Verify Top-level Port Placement Results
+   check_pin_placement -self -pre_route true -pin_spacing true -sides true -layers true -stacking true
+
+   # Generate Top-level Port Placement Report
+   report_pin_placement -self > $REPORTS_DIR_PLACE_PINS/report_port_placement.rpt
+}
+
+save_block -hier -force -label ${PLACE_PINS_LABEL_NAME}
+save_lib -all
+
+
+################################################################################
+# SAVE SNAPSHOT
+################################################################################
+save_block -hier -force -label placement_ready
+save_lib -all
+
+puts "\n===== FLOORPLAN COMPLETED SUCCESSFULLY =====\n"
+
+```
+
+</details>
+
 
 ---
 
@@ -394,14 +981,6 @@ source -echo ./icc2_dp_setup.tcl
 - Loads all design variables and paths
 - Sets up the execution environment
 
-> **📋 Log Placeholder:**
-> ```
-> [FLOORPLAN_INIT_LOG]
-> RM-info : Sourcing icc2_common_setup.tcl
-> RM-info : Design: raven_wrapper
-> RM-info : Library: raven_wrapperNangate
-> RM-info : Sourcing icc2_dp_setup.tcl
-> ```
 
 ---
 
@@ -433,20 +1012,6 @@ open_lib ${WORK_DIR}/${DESIGN_LIBRARY}
 - Reference LEF files (standard cells + SRAM)
 - Technology file (.tf)
 
-> **📸 Screenshot Placeholder:**
-> ![Library Creation](./images/02_library_creation.png)
-> *Figure 2: Design library creation in ICC2*
-
-> **📋 Log Placeholder:**
-> ```
-> [LIBRARY_LOG]
-> RM-info : Creating library raven_wrapperNangate
-> Information: Creating design library 'work/raven_wrapperNangate' (LIB-001)
-> Information: Reading reference library '/path/to/nangate_stdcell.lef' (LIB-003)
-> Information: Reading reference library '/path/to/sram_32_1024_freepdk45.lef' (LIB-003)
-> Information: Reading technology file '/path/to/nangate.tf' (TECH-001)
-> ```
-
 ---
 
 ### Block 3: Netlist Import
@@ -468,18 +1033,6 @@ read_verilog \
 - Creates design block with label "init_dp"
 - Sets top-level module
 - Links netlist to library cells
-
-> **📋 Log Placeholder:**
-> ```
-> [NETLIST_READ_LOG]
-> RM-info : Reading netlist
-> Information: Reading Verilog file '/path/to/raven_wrapper.synth.v' (VER-017)
-> Information: Elaborating design 'raven_wrapper' (VER-018)
-> Information: Linking design 'raven_wrapper' (LINK-001)
-> Information: Design has 45,892 instances
-> Information: Design has 52 IO pads
-> Information: Design has 1 hard macro
-> ```
 
 ---
 
@@ -507,17 +1060,6 @@ if {[file exists [which $TCL_PARASITIC_SETUP_FILE]]} {
 - `init_design.tech_setup.tcl` - Layer properties
 - `init_design.read_parasitic_tech_example.tcl` - TLU+ files
 
-> **📋 Log Placeholder:**
-> ```
-> [TECH_SETUP_LOG]
-> RM-info : Setting up technology parameters
-> Information: Setting metal1 direction to horizontal
-> Information: Setting metal2 direction to vertical
-> ...
-> RM-info : Reading TLU+ parasitic files
-> Information: Reading max TLU+ file (PARA-001)
-> Information: Reading min TLU+ file (PARA-002)
-> ```
 
 ---
 
@@ -548,21 +1090,6 @@ save_block -force -label floorplan
 - **Core Area:** 2988 × 4588 = 13.71 mm²
 - **Core Utilization:** Available for standard cells and routing
 
-> **📸 Screenshot Placeholder:**
-> ![Floorplan Initialization](./images/03_floorplan_init.png)
-> *Figure 3: Initial floorplan with die and core boundaries*
-
-> **📋 Log Placeholder:**
-> ```
-> [FLOORPLAN_INIT_LOG]
-> RM-info : Initializing floorplan
-> Information: Die boundary set to {{0 0} {3588 5188}} (FLOOR-001)
-> Information: Core offset set to {300 300 300 300} (FLOOR-002)
-> Information: Core area: 2988 x 4588 um (FLOOR-003)
-> Information: Die area: 18.61 mm^2
-> Information: Core area: 13.71 mm^2
-> Information: Saving block with label 'floorplan' (BLOCK-001)
-> ```
 
 ---
 
@@ -582,14 +1109,6 @@ save_block -force -label pre_shape
 - Prepares design for subsequent PG planning
 - Saves checkpoint before shaping
 
-> **📋 Log Placeholder:**
-> ```
-> [PG_CONNECT_LOG]
-> Information: Connecting PG nets automatically (PG-001)
-> Information: Connected VDD to 45,892 standard cells
-> Information: Connected VSS to 45,892 standard cells
-> Information: Saving block with label 'pre_shape'
-> ```
 
 ---
 
@@ -622,22 +1141,6 @@ set_attribute \
 - Top side: 9 pads (GPIO 11-15, interrupt)
 - Bottom side: 10 pads (temperature, PLL, serial, SPI)
 
-> **📸 Screenshot Placeholder:**
-> ![IO Pad Placement](./images/04_io_pad_placement.png)
-> *Figure 4: IO pads placed around die periphery*
-
-> **📋 Log Placeholder:**
-> ```
-> [IO_PLACEMENT_LOG]
-> RM-info : Sourcing pad constraints
-> RM-info : Placing IO pads
-> Information: Placed 52 IO pads (PAD-001)
-> Information: Right side: 11 pads
-> Information: Left side: 11 pads
-> Information: Top side: 9 pads
-> Information: Bottom side: 10 pads
-> Information: Setting 52 pads to fixed status
-> ```
 
 ---
 
@@ -661,9 +1164,6 @@ create_keepout_margin \
 - Ensures proper spacing for pad routing
 - Applied on all 4 sides of each pad
 
-> **📸 Screenshot Placeholder:**
-> ![Pad Keepouts](./images/05_pad_keepouts.png)
-> *Figure 5: Hard keepout margins around IO pads (shown in yellow)*
 
 ---
 
@@ -709,9 +1209,6 @@ create_placement_blockage -type hard \
 | Left | (300,320) to (320,4868) | 20µm |
 | Right | (3268,320) to (3288,4868) | 20µm |
 
-> **📸 Screenshot Placeholder:**
-> ![Core Edge Blockages](./images/06_core_edge_blockages.png)
-> *Figure 6: Hard placement blockages around core boundary*
 
 ---
 
@@ -744,10 +1241,6 @@ if {[sizeof_collection $sram] > 0} {
 - Configuration: 32-bit word, 1024 entries
 - Location: Upper-left region of core
 - Orientation: Rotated for optimal routing
-
-> **📸 Screenshot Placeholder:**
-> ![SRAM Placement](./images/07_sram_placement.png)
-> *Figure 7: SRAM macro placed in upper-left core region*
 
 ---
 
@@ -784,9 +1277,6 @@ if {[sizeof_collection $macros] > 0} {
 - Prevents DRC violations
 - Allows power strap access
 
-> **📸 Screenshot Placeholder:**
-> ![Macro Halos](./images/08_macro_halos.png)
-> *Figure 8: Asymmetric halo around SRAM macro*
 
 ---
 
@@ -824,9 +1314,6 @@ if {[sizeof_collection $sram] > 0} {
 - Width: 274.53µm (594.53 - 320.0)
 - Height: 279.99µm (4802.915 - 4522.925)
 
-> **📸 Screenshot Placeholder:**
-> ![Left Side Blockage](./images/09_left_blockage.png)
-> *Figure 9: Hard blockage creating routing channel on SRAM left side*
 
 ---
 
@@ -852,16 +1339,6 @@ if {[file exists $TCL_MCMM_SETUP_FILE]} {
 - **Typical corner:** Nominal conditions
 - **Slow corner:** Worst case (high delay)
 
-> **📋 Log Placeholder:**
-> ```
-> [MCMM_LOG]
-> RM-info : Loading MCMM constraints
-> Information: Creating corner 'slow' (MCMM-001)
-> Information: Creating corner 'typical' (MCMM-002)
-> Information: Creating mode 'func' (MCMM-003)
-> Information: Creating scenario 'func.slow' (MCMM-004)
-> Information: Loading constraints for scenario 'func.slow'
-> ```
 
 ---
 
@@ -985,20 +1462,6 @@ save_lib -all
 - Layer assignment correctness
 - Pin stacking violations
 
-> **📸 Screenshot Placeholder:**
-> ![Pin Placement](./images/10_pin_placement.png)
-> *Figure 10: Block pins placed on core boundary*
-
-> **📋 Log Placeholder:**
-> ```
-> [PIN_PLACEMENT_LOG]
-> Information: Running pre-pin placement checks
-> Information: Placing pins automatically with timing consideration
-> Information: Placed 2,456 block pins
-> Information: Pin placement verification passed
-> Information: Generating pin placement report
-> Information: Saving block with label 'place_pins'
-> ```
 
 ---
 
@@ -1020,9 +1483,6 @@ puts "\n===== FLOORPLAN COMPLETED SUCCESSFULLY =====\n"
 - Prints completion message
 - Creates restore point before placement
 
-> **📸 Screenshot Placeholder:**
-> ![Floorplan Complete](./images/11_floorplan_complete.png)
-> *Figure 11: Completed floorplan showing all elements*
 
 ---
 
@@ -1030,6 +1490,142 @@ puts "\n===== FLOORPLAN COMPLETED SUCCESSFULLY =====\n"
 
 ### Script Overview
 The power planning script creates a robust power distribution network (PDN) with rings, straps, and mesh.
+
+<details>
+  <summary>powerplan.tcl</summary>
+```
+################################################################################
+# POWER PLAN TCL – CONSOLIDATED & CLEAN
+# Compatible with Synopsys ICC2
+################################################################################
+
+puts "RM-info : Starting Power Planning Flow"
+
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect
+########################################
+# 0. Global PG Nets
+########################################
+set PG_NETS {VDD VSS}
+
+########################################
+# 1. Connect PG nets automatically
+########################################
+puts "RM-info : Connecting PG nets automatically"
+connect_pg_net -automatic -all_blocks
+
+########################################
+# 2. CORE POWER RING
+########################################
+puts "RM-info : Creating Core PG Ring"
+
+create_pg_ring_pattern ring_pattern -horizontal_layer metal10 \
+    -horizontal_width {5} -horizontal_spacing {2} \
+    -vertical_layer metal9 -vertical_width {5} \
+    -vertical_spacing {2} -corner_bridge false
+set_pg_strategy core_ring -core -pattern \
+    {{pattern: ring_pattern}{nets: {VDD VSS}}{offset: {3 3}}} \
+    -extension {{stop: innermost_ring}}
+
+########################################
+# 3. MACRO POWER RINGS
+########################################
+puts "RM-info : Creating Macro PG Rings"
+
+create_pg_ring_pattern macro_ring_pattern -horizontal_layer metal10 \
+    -horizontal_width {5} -horizontal_spacing {2} \
+    -vertical_layer metal9 -vertical_width {5} \
+    -vertical_spacing {2} -corner_bridge false
+set_pg_strategy macro_core_ring -macros [get_cells -hierarchical -filter "is_hard_macro==true"] -pattern \
+    {{pattern: macro_ring_pattern}{nets: {VDD VSS}}{offset: {10 10}}} 
+
+########################################
+# 4. PG MESH (CORE ONLY)
+########################################
+puts "RM-info : Creating PG Mesh"
+
+create_pg_region pg_mesh_region -core -expand -2 -exclude_macros sram -macro_offset 20
+create_pg_mesh_pattern pg_mesh1 \
+   -parameters {w1 p1 w2 p2 f t} \
+   -layers {{{vertical_layer: metal9} {width: @w1} {spacing: interleaving} \
+        {pitch: @p1} {offset: @f} {trim: @t}} \
+ 	     {{horizontal_layer: metal10} {width: @w2} {spacing: interleaving} \
+        {pitch: @p2} {offset: @f} {trim: @t}}}
+
+
+set_pg_strategy s_mesh1 \
+   -pattern {{pattern: pg_mesh1} {nets: {VDD VSS VSS VDD} } \
+{offset_start: 10 20} {parameters: 4 80 6 120 3.344 false}} \
+   -pg_region pg_mesh_region -extension {{stop: innermost_ring}} 
+
+########################################
+# 5. MACRO PG PIN CONNECTIONS
+########################################
+puts "RM-info : Connecting Macro PG Pins"
+
+create_pg_macro_conn_pattern hm_pattern -pin_conn_type scattered_pin -layer {metal3 metal3}
+set toplevel_hms [filter_collection [get_cells * -physical_context] "is_hard_macro == true"]
+set_pg_strategy macro_con -macros $toplevel_hms -pattern {{name: hm_pattern} {nets: {VDD VSS}} }
+
+########################################
+# 6. STANDARD CELL RAILS
+########################################
+puts "RM-info : Creating Standard Cell PG Rails"
+
+create_pg_std_cell_conn_pattern \
+    std_cell_rail  \
+    -layers {metal1} \
+    -rail_width 0.06
+
+set_pg_strategy rail_strat  -pg_region pg_mesh_region \
+    -pattern {{name: std_cell_rail} {nets: VDD VSS} }
+
+########################################
+# 7. Compile PG
+########################################
+puts "RM-info : Compiling PG strategies"
+
+compile_pg 
+
+########################################
+# 8. PG CHECKS
+########################################
+puts "RM-info : Running PG Checks"
+
+check_pg_missing_vias
+check_pg_drc -ignore_std_cells
+check_pg_connectivity -check_std_cell_pins none
+
+########################################
+# 9. Save Block
+########################################
+puts "RM-info : Saving block after power planning"
+save_block -hier -force -label CREATE_POWER
+save_lib -all
+
+puts "RM-info : Power Planning Completed Successfully"
+
+estimate_timing
+redirect -file $REPORTS_DIR_TIMING_ESTIMATION/${DESIGN_NAME}.post_estimated_timing.rpt     {report_timing -corner estimated_corner -mode [all_modes]}
+redirect -file $REPORTS_DIR_TIMING_ESTIMATION/${DESIGN_NAME}.post_estimated_timing.qor     {report_qor    -corner estimated_corner}
+redirect -file $REPORTS_DIR_TIMING_ESTIMATION/${DESIGN_NAME}.post_estimated_timing.qor.sum {report_qor    -summary}
+
+save_block -hier -force   -label ${TIMING_ESTIMATION_LABEL_NAME}
+save_lib -all
+
+
+set path_dir [file normalize ${WORK_DIR_WRITE_DATA}]
+set write_block_data_script ./write_block_data.tcl
+source ${write_block_data_script}
+
+```
+
+</details>
+
 
 ---
 
@@ -1097,14 +1693,6 @@ connect_pg_net -automatic -all_blocks
 - Connects macro power/ground pins
 - Updates pin-to-net associations
 
-> **📋 Log Placeholder:**
-> ```
-> [PG_CONNECT_LOG]
-> RM-info : Connecting PG nets automatically
-> Information: Connecting standard cell pins to VDD/VSS
-> Information: Connected 45,892 cells to power nets
-> Information: Connecting macro PG pins
-> ```
 
 ---
 
@@ -1149,9 +1737,6 @@ set_pg_strategy core_ring -core -pattern \
 | Spacing | 2µm | VDD-to-VSS gap |
 | Offset | 3µm | Distance from core edge |
 
-> **📸 Screenshot Placeholder:**
-> ![Core Ring](./images/12_core_power_ring.png)
-> *Figure 12: Core power ring on Metal9/Metal10*
 
 ---
 
@@ -1188,9 +1773,6 @@ set_pg_strategy macro_core_ring \
 - Isolate macro noise from core logic
 - Provide stable power supply
 
-> **📸 Screenshot Placeholder:**
-> ![Macro Ring](./images/13_macro_power_ring.png)
-> *Figure 13: Power ring around SRAM macro*
 
 ---
 
@@ -1281,9 +1863,6 @@ set_pg_strategy s_mesh1 \
 - Provides multiple current paths
 - Reduces IR drop significantly
 
-> **📸 Screenshot Placeholder:**
-> ![Power Mesh](./images/14_power_mesh.png)
-> *Figure 14: Complete power mesh showing M9/M10 stripes*
 
 ---
 
@@ -1320,9 +1899,6 @@ set_pg_strategy macro_con \
 - Connects to both VDD and VSS
 - Multiple connection points reduce resistance
 
-> **📸 Screenshot Placeholder:**
-> ![Macro Connections](./images/15_macro_connections.png)
-> *Figure 15: Power connections to SRAM pins on Metal3*
 
 ---
 
@@ -1363,9 +1939,6 @@ set_pg_strategy rail_strat \
 - Standard cell height determines rail placement
 - Minimal via stacks required
 
-> **📸 Screenshot Placeholder:**
-> ![Std Cell Rails](./images/16_stdcell_rails.png)
-> *Figure 16: Metal1 rails connecting standard cells (zoomed view)*
 
 ---
 
@@ -1395,23 +1968,6 @@ compile_pg
 5. Optimizes via placement
 6. Generates final PG routing
 
-> **📋 Log Placeholder:**
-> ```
-> [COMPILE_PG_LOG]
-> RM-info : Compiling PG strategies
-> Information: Compiling strategy 'core_ring' (PG-101)
-> Information: Compiling strategy 'macro_core_ring' (PG-102)
-> Information: Compiling strategy 's_mesh1' (PG-103)
-> Information: Compiling strategy 'macro_con' (PG-104)
-> Information: Compiling strategy 'rail_strat' (PG-105)
-> Information: Generated 2,847 power shapes
-> Information: Generated 1,965 via arrays
-> Information: PG compilation completed successfully
-> ```
-
-> **📸 Screenshot Placeholder:**
-> ![Compiled PG](./images/17_compiled_pg.png)
-> *Figure 17: Complete power distribution network after compilation*
 
 ---
 
@@ -1448,19 +2004,6 @@ check_pg_connectivity -check_std_cell_pins none
    - All VSS shapes connected together
    - No open circuits
 
-> **📋 Log Placeholder:**
-> ```
-> [PG_CHECKS_LOG]
-> RM-info : Running PG Checks
-> Information: Checking for missing vias... (PG-201)
-> Information: No missing vias found
-> Information: Checking PG DRC... (PG-202)
-> Information: No DRC violations found
-> Information: Checking PG connectivity... (PG-203)
-> Information: VDD net fully connected
-> Information: VSS net fully connected
-> Information: PG verification PASSED
-> ```
 
 ---
 
@@ -1482,10 +2025,6 @@ puts "RM-info : Power Planning Completed Successfully"
 - Writes all changes to disk
 - Creates checkpoint for next stage
 - Prints completion message
-
-> **📸 Screenshot Placeholder:**
-> ![Power Plan Complete](./images/18_power_plan_complete.png)
-> *Figure 18: Final power plan with all elements visible*
 
 ---
 
@@ -1516,16 +2055,6 @@ save_lib -all
 2. **QoR Report:** Setup/hold slack, TNS, WNS
 3. **QoR Summary:** High-level metrics
 
-> **📋 Log Placeholder:**
-> ```
-> [TIMING_EST_LOG]
-> Information: Estimating timing with PG parasitics
-> Information: Worst setup slack: 0.85ns
-> Information: Worst hold slack: 0.12ns
-> Information: Total negative slack (TNS): 0.0
-> Information: Number of failing endpoints: 0
-> Information: Saving block with label 'timing_estimation'
-> ```
 
 ---
 
@@ -1550,6 +2079,27 @@ source ${write_block_data_script}
 ### Script Overview
 This final script performs placement, clock tree synthesis, and detailed routing to complete the physical design.
 
+```
+<details>
+  <summary>place_cts_route</summary>
+####################################
+# Place, CTS, Route
+####################################
+eval create_placement $CMD_OPTIONS
+report_placement    -physical_hierarchy_violations all    -wirelength all -hard_macro_overlap    -verbose high > $REPORTS_DIR_PLACEMENT/report_placement.rpt
+set_host_options -max_cores 8
+remove_corners [get_corners estimated_corner]
+set_app_options -name place.coarse.continue_on_missing_scandef -value true
+place_opt
+clock_opt
+route_auto -max_detail_route_iterations 5
+set FILLER_CELLS [get_object_name [sort_collection -descending [get_lib_cells NangateOpenCellLibrary/FILL*] area]]
+create_stdcell_fillers -lib_cells $FILLER_CELLS
+
+save_block -hier -force   -label post_route
+save_lib -all
+```
+</details>
 ---
 
 ### Block 1: Placement
@@ -1579,22 +2129,6 @@ report_placement \
 3. Avoid congestion hotspots
 4. Respect density constraints (65%)
 5. No macro overlaps
-
-> **📸 Screenshot Placeholder:**
-> ![Initial Placement](./images/19_initial_placement.png)
-> *Figure 19: Standard cells placed in rows*
-
-> **📋 Log Placeholder:**
-> ```
-> [PLACEMENT_LOG]
-> Information: Starting coarse placement
-> Information: Placed 45,892 standard cells
-> Information: Total wirelength: 2,847,523 um
-> Information: Maximum density: 0.68
-> Information: Average density: 0.62
-> Information: Congestion hotspots: 0
-> Information: Generating placement report
-> ```
 
 ---
 
@@ -1633,22 +2167,6 @@ place_opt
 3. **Setup Recovery:** Resize critical cells
 4. **Final Legalization:** Snap to grid
 
-> **📸 Screenshot Placeholder:**
-> ![After place_opt](./images/20_after_place_opt.png)
-> *Figure 20: Placement after optimization showing added buffers*
-
-> **📋 Log Placeholder:**
-> ```
-> [PLACE_OPT_LOG]
-> Information: Starting place_opt
-> Information: Initial WNS: 0.85ns, TNS: 0.0ns
-> Information: Inserted 347 buffers
-> Information: Resized 892 cells
-> Information: Final WNS: 1.23ns, TNS: 0.0ns
-> Information: Hold WNS: 0.08ns
-> Information: Design legalized
-> ```
-
 ---
 
 ### Block 4: Clock Tree Synthesis
@@ -1678,25 +2196,6 @@ Root (clock source)
   │   │   ├─ Level 3 Buffers (512-1024)
   │   │   │   └─ Sink Flops (45K+)
 ```
-
-> **📸 Screenshot Placeholder:**
-> ![Clock Tree](./images/21_clock_tree.png)
-> *Figure 21: Clock tree structure showing buffer hierarchy*
-
-> **📋 Log Placeholder:**
-> ```
-> [CTS_LOG]
-> Information: Starting clock_opt
-> Information: Building clock tree for 'ext_clk'
-> Information: Building clock tree for 'pll_clk'
-> Information: Building clock tree for 'spi_sck'
-> Information: Inserted 2,847 clock buffers
-> Information: Clock skew: 45ps (ext_clk)
-> Information: Clock skew: 38ps (pll_clk)
-> Information: Clock skew: 52ps (spi_sck)
-> Information: Setup WNS: 1.45ns
-> Information: Hold WNS: 0.15ns
-> ```
 
 ---
 
@@ -1730,29 +2229,6 @@ route_auto -max_detail_route_iterations 5
    - Fixes spacing violations
    - Optimizes parasitics
 
-> **📸 Screenshot Placeholder:**
-> ![After Routing](./images/22_after_routing.png)
-> *Figure 22: Design after detailed routing*
-
-> **📋 Log Placeholder:**
-> ```
-> [ROUTE_LOG]
-> Information: Starting route_auto
-> Information: Global routing iteration 1
-> Information: Total overflow: 0
-> Information: Track assignment completed
-> Information: Detailed routing iteration 1
-> Information: DRC violations: 156
-> Information: Detailed routing iteration 2
-> Information: DRC violations: 24
-> Information: Detailed routing iteration 3
-> Information: DRC violations: 3
-> Information: Detailed routing iteration 4
-> Information: DRC violations: 0
-> Information: Routing completed successfully
-> Information: Total wire length: 3,245,678 um
-> Information: Total vias: 1,234,567
-> ```
 
 ---
 
@@ -1785,20 +2261,6 @@ create_stdcell_fillers -lib_cells $FILLER_CELLS
 - Ensure power rail continuity
 - Meet foundry DRC rules
 
-> **📸 Screenshot Placeholder:**
-> ![With Fillers](./images/23_with_fillers.png)
-> *Figure 23: Design with filler cells inserted (zoomed view)*
-
-> **📋 Log Placeholder:**
-> ```
-> [FILLER_LOG]
-> Information: Finding filler cells from library
-> Information: Found 6 filler cell types
-> Information: Inserting filler cells
-> Information: Inserted 15,234 filler cells
-> Information: Total filler area: 0.245 mm^2
-> ```
-
 ---
 
 ### Block 7: Final Save
@@ -1813,10 +2275,6 @@ save_lib -all
 - Writes complete routed design to disk
 - Creates final checkpoint
 - Preserves all PNR data
-
-> **📸 Screenshot Placeholder:**
-> ![Final Design](./images/24_final_design.png)
-> *Figure 24: Complete routed design ready for signoff*
 
 ---
 
@@ -2015,17 +2473,17 @@ cp /path/to/*.tf .
 
 ### Step 3: Run Floorplanning
 ```bash
-icc2_shell -f scripts/floorplan.tcl | tee logs_icc2/floorplan.log
+icc2_shell -f floorplan.tcl | tee logs_icc2/floorplan.log
 ```
 
 ### Step 4: Run Power Planning
 ```bash
-icc2_shell -f scripts/power_plan.tcl | tee logs_icc2/power_plan.log
+icc2_shell -f power_plan.tcl | tee logs_icc2/power_plan.log
 ```
 
 ### Step 5: Run Place/CTS/Route
 ```bash
-icc2_shell -f scripts/place_cts_route.tcl | tee logs_icc2/place_cts_route.log
+icc2_shell -f place_cts_route.tcl | tee logs_icc2/place_cts_route.log
 ```
 
 ### Step 6: Verify Results
