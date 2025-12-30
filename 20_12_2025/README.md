@@ -300,6 +300,7 @@ This script configures design planning specific options.
 
 <details>
   <summary>icc2_dp_setup.tcl</summary>
+	
 ```
 puts "RM-info : Running script [info script]\n"
 ##########################################################################################
