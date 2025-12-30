@@ -2860,6 +2860,7 @@ The power planning script creates a robust power distribution network (PDN) with
 
 <details>
   <summary>powerplan.tcl</summary>
+	
 ```
 ################################################################################
 # POWER PLAN TCL – CONSOLIDATED & CLEAN
